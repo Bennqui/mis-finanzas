@@ -3,7 +3,7 @@ y la guarda en tasa.json, con su «Fecha Valor». Solo escribe si encuentra dato
 import json, re, sys, datetime, html
 src = open(sys.argv[1], encoding='utf-8', errors='replace').read()
 def rate(div_id):
-    m = re.search(r'id="%s".*?<strong>\s*([\d.,]+)\s*</strong>' % div_id, src, re.S)
+    m = re.search(r'id="%s".*?<strong[^>]*>\s*([\d.,]+)\s*</strong>' % div_id, src, re.S)
     if not m: return None
     v = m.group(1).strip().replace('.', '').replace(',', '.')
     try: return round(float(v), 8)

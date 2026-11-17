@@ -35,9 +35,6 @@ jobs:
             sleep 20
           done
           [ "$ok" = 1 ] || { echo "No pude descargar bcv.org.ve"; exit 1; }
-      - name: Revisar la página
-        run: |
-          python3 -c "s=open('bcv.html',encoding='utf-8',errors='replace').read();i=s.find('id=\"dolar\"');print(repr(s[i:i+1500]));j=s.find('Fecha Valor');print(repr(s[j-200:j+400]))"
       - name: Leer la tasa
         run: python3 tareas/tasa_bcv.py bcv.html
       - name: Guardar
