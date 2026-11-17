@@ -1387,7 +1387,7 @@ input:focus,select:focus{border-color:var(--blue)!important;box-shadow:0 0 0 3px
 <script>
 /* Capa v4: dock, transiciones entre secciones y cifras que cuentan hacia su valor. */
 (function(){
- const ORDER=['resumen','gastos','historial','compartidos','tarjeta','meta','patrimonio'],MORE=['historial','compartidos','tarjeta','patrimonio'];
+ const ORDER=['resumen','gastos','historial','compartidos','tarjeta','meta','carro','patrimonio','bcv'],MORE=['historial','compartidos','tarjeta','patrimonio','bcv','carro'];
  const q=s=>document.querySelector(s),qa=s=>[...document.querySelectorAll(s)];
  if(window.Chart){Chart.defaults.color='#8E95A8';Chart.defaults.font.family="'Manrope',sans-serif";Chart.defaults.borderColor='rgba(255,255,255,.06)';Chart.defaults.animation={duration:900,easing:'easeOutQuart'}}
  const ease=t=>1-Math.pow(1-t,3);
@@ -1412,6 +1412,230 @@ input:focus,select:focus{border-color:var(--blue)!important;box-shadow:0 0 0 3px
  /* primera pintura */
  const start=()=>{try{go(S.view||'resumen')}catch(e){}};
  if(document.readyState==='complete')setTimeout(start,30);else addEventListener('load',()=>setTimeout(start,30));
+})();
+</script>
+
+<!-- ===== Capa v5: Dólar BCV, calculadora del carro, bolsillos, escenarios, modo privado, racha, reto, fijos, alertas y tu mes en historia ===== -->
+<style id="v5">
+.x5row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.x5chip{display:inline-flex;align-items:center;gap:7px;padding:9px 13px;border-radius:999px;background:var(--surface);border:1px solid #1D1D25;font-weight:700;font-size:12.5px;color:var(--text);transition:transform .15s}
+.x5chip:active{transform:scale(.95)}
+.x5chip.warn{border-color:rgba(255,181,71,.45);color:var(--amber)}
+.x5chip.blu{border-color:rgba(91,155,255,.45);color:var(--blue3)}
+.eye{width:40px;height:40px;border-radius:50%;background:var(--surface);border:1px solid #1D1D25;color:var(--text);font-size:17px;display:grid;place-items:center}
+body.priv .view .num,body.priv .view .val,body.priv .view .big,body.priv .story .bigv{filter:blur(11px);transition:filter .3s}
+.bcvmini{display:flex;align-items:center;gap:14px;cursor:pointer;margin-bottom:16px}
+.bcvmini .fl{width:46px;height:46px;border-radius:15px;background:#15151B;display:grid;place-items:center;font-size:24px;flex:none}
+.bcvmini b{font-family:var(--fd);font-size:22px}
+.bcvmini small{display:block;color:var(--muted);font-size:12px}
+.conv .inp{display:flex;align-items:center;background:#101015;border:1px solid #24242D;border-radius:20px;padding:4px 16px;margin:8px 0;transition:border-color .2s,box-shadow .2s}
+.conv .inp:focus-within{border-color:var(--blue);box-shadow:0 0 0 3px rgba(47,123,255,.2)}
+.conv .inp span{font-family:var(--fd);font-weight:700;color:var(--muted);width:46px;font-size:15px}
+.conv .inp input{flex:1;min-width:0;background:none!important;border:0!important;font-family:var(--fd);font-size:30px;font-weight:700;color:#fff;padding:12px 0;outline:0;box-shadow:none!important;text-align:right}
+.swap{display:block;margin:-2px auto;width:44px;height:44px;border-radius:50%;background:var(--blue);color:#fff;border:0;font-size:20px;box-shadow:0 8px 20px rgba(47,123,255,.45);transition:transform .45s var(--spring)}
+.swap.r{transform:rotate(180deg)}
+.qchips{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+.pk{display:grid;grid-template-columns:46px 1fr auto;gap:12px;align-items:center;padding:13px 0;border-bottom:1px solid #17171E}
+.pk:last-child{border-bottom:0}
+.pk .e{width:46px;height:46px;border-radius:15px;display:grid;place-items:center;font-size:22px;background:#15151B}
+.pk b{font-family:var(--fd);font-size:14.5px}.pk small{color:var(--muted);font-size:12px;display:block;margin:2px 0 7px}
+.pk .v{font-family:var(--fd);font-weight:700;text-align:right}
+.dots7{display:flex;gap:6px;margin-top:8px}.dots7 i{width:22px;height:22px;border-radius:50%;background:#15151B;border:1px solid #23232c;transition:background .3s}
+.dots7 i.on{background:var(--green);border-color:var(--green);box-shadow:0 0 12px rgba(47,224,161,.45);animation:popd .4s var(--spring) both}
+@keyframes popd{from{transform:scale(.4)}to{transform:none}}
+.scn{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+.scn div{background:#15151B;border:1px solid #23232C;border-radius:16px;padding:10px;text-align:center}
+.scn b{display:block;font-family:var(--fd);font-size:17px}.scn span{font-size:11.5px;color:var(--muted)}
+.carf label{display:flex;justify-content:space-between;font-size:12.5px;color:var(--muted);font-weight:700;margin:14px 0 6px}
+.carf label b{color:var(--text);font-family:var(--fd)}
+.carf input[type=range]{width:100%;accent-color:var(--blue)}
+.storybtn{display:flex;align-items:center;gap:14px;width:100%;text-align:left;cursor:pointer;background:linear-gradient(140deg,#121a33,#0B0B0E 70%);border:1px solid rgba(91,155,255,.3)}
+.storybtn .pl{width:48px;height:48px;border-radius:50%;background:var(--blue);display:grid;place-items:center;font-size:18px;box-shadow:0 0 0 6px rgba(47,123,255,.15);flex:none;animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 12px rgba(47,123,255,0)}}
+.story{position:fixed;inset:0;z-index:90;background:#000;display:none;flex-direction:column;padding:calc(12px + env(safe-area-inset-top,0px)) 20px calc(26px + env(safe-area-inset-bottom,0px));user-select:none;-webkit-user-select:none}
+.story.on{display:flex;animation:fadeIn .3s}
+.story .glow{position:absolute;inset:0;z-index:-1;background:radial-gradient(60% 45% at 50% 42%,rgba(47,123,255,.35),transparent 70%);animation:aurora 9s ease-in-out infinite alternate}
+.story .segs{display:flex;gap:4px;position:relative;z-index:2}.story .segs i{flex:1;height:3px;border-radius:2px;background:rgba(255,255,255,.2);overflow:hidden}
+.story .segs i b{display:block;height:100%;width:0;background:#fff}.story .segs i.done b{width:100%}.story .segs i.cur b{animation:segf 5s linear forwards}
+.story .sx{position:absolute;top:calc(26px + env(safe-area-inset-top,0px));right:14px;z-index:3;width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.1);border:0;color:#fff;font-size:16px}
+.story .slide{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:12px;animation:storyIn .6s var(--spring) both}
+.story .em{font-size:64px;animation:storyIn .6s .1s var(--spring) both}
+.story .k{font-size:12.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.14em;font-weight:800}
+.story .bigv{font-family:var(--fd);font-size:54px;font-weight:800;letter-spacing:-.03em;background:linear-gradient(120deg,#fff,#9CC2FF);-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.05}
+.story .t{font-family:var(--fd);font-size:22px;font-weight:700;max-width:320px}
+.story .s{color:var(--muted);font-size:15px;max-width:320px;line-height:1.45}
+.story .hint{text-align:center;color:var(--dim);font-size:12px}
+@keyframes segf{to{width:100%}}
+@keyframes storyIn{from{opacity:0;transform:scale(.9) translateY(24px)}to{opacity:1;transform:none}}
+</style>
+<div class="story" id="story"><div class="glow"></div><div class="segs" id="stSegs"></div><button class="sx" id="stX" aria-label="Cerrar">✕</button><div class="slide" id="stSlide"></div><div class="hint">Toca a la derecha para avanzar · a la izquierda para volver</div></div>
+<script>
+/* Capa v5 (ver comentario arriba). Todo lo nuevo se guarda dentro de tus datos (D.x4), así entra en tus respaldos. */
+(function(){
+ const q=s=>document.querySelector(s),qa=s=>[...document.querySelectorAll(s)];
+ const X=()=>{D.x4=D.x4||{};D.x4.al=D.x4.al||{};D.x4.viaje=D.x4.viaje||{meta:2000,saldo:0};D.x4.car=D.x4.car||{precio:40000,inicial:null,tasa:16,plazo:60,tope:800};return D.x4};
+ const fmt2=v=>'$'+(+v||0).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+ const bs=v=>(+v||0).toLocaleString('es-VE',{minimumFractionDigits:2,maximumFractionDigits:2});
+ const pnum=s=>{s=String(s||'').replace(/[^\d.,-]/g,'');if(!s)return 0;if(s.includes(',')&&s.includes('.'))s=s.lastIndexOf(',')>s.lastIndexOf('.')?s.replace(/\./g,'').replace(',','.'):s.replace(/,/g,'');else if(s.includes(','))s=s.replace(',','.');return parseFloat(s)||0};
+ const MESX=['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+ const fdate=iso=>{if(!iso)return '';const[y,m,d]=iso.split('-');return `${+d} ${MESX[+m-1]} ${y}`};
+
+ /* ---------- secciones nuevas ---------- */
+ const main=q('main');
+ main.insertAdjacentHTML('beforeend',`
+ <section class="view" id="v-bcv">
+  <div class="card kpi hero" style="margin-bottom:16px"><div class="lbl">🇻🇪 Dólar oficial BCV</div><div class="val num" id="bcvRate">—</div><div class="foot" id="bcvF">Buscando la tasa…</div></div>
+  <div class="card conv" style="margin-bottom:16px"><h3>Calculadora</h3><div class="sub">Escribe en cualquiera de los dos y se convierte al instante</div>
+   <div class="inp"><span>USD</span><input id="cvUsd" inputmode="decimal" placeholder="0,00" autocomplete="off"></div>
+   <button class="swap" id="cvSwap" aria-label="Cambiar">⇅</button>
+   <div class="inp"><span>Bs</span><input id="cvBs" inputmode="decimal" placeholder="0,00" autocomplete="off"></div>
+   <div class="qchips" id="cvQ"></div><div class="sub" id="cvEur" style="margin-top:12px"></div></div>
+  <div class="card" style="margin-bottom:16px"><h3>Cómo se ha movido</h3><div class="sub" id="bcvHS">El historial se va llenando día a día</div><div style="height:180px"><canvas id="cBcv"></canvas></div></div>
+  <div class="card"><h3>Calcular con otra tasa</h3><div class="sub">Útil sin internet o para comparar. Déjalo vacío para usar la oficial.</div>
+   <input class="field num" id="bcvMan" inputmode="decimal" placeholder="Bs por dólar" style="margin-top:10px">
+   <div class="sub" style="margin-top:10px">Fuente: Banco Central de Venezuela (bcv.org.ve). La app la consulta sola varias veces al día.</div></div>
+ </section>
+ <section class="view" id="v-carro">
+  <div class="grid g4" style="margin-bottom:16px">
+   <div class="card kpi hero"><div class="lbl">🚗 Cuota mensual</div><div class="val num" id="crCuota"></div><div class="foot" id="crCuotaF"></div></div>
+   <div class="card kpi"><div class="lbl">🏦 Préstamo</div><div class="val num" id="crLoan"></div><div class="foot" id="crLoanF"></div></div>
+   <div class="card kpi"><div class="lbl">💸 Intereses totales</div><div class="val num" id="crInt"></div><div class="foot" id="crIntF"></div></div>
+   <div class="card kpi"><div class="lbl">🎯 Inicial mínima</div><div class="val num" id="crMin"></div><div class="foot" id="crMinF"></div></div>
+  </div>
+  <div class="card carf" style="margin-bottom:16px"><h3>Ajusta tu carro</h3><div class="sub">Todo se recalcula al moverlo</div>
+   <label>Precio del carro <b id="crPrecioV"></b></label><input type="range" id="crPrecio" min="10000" max="90000" step="500">
+   <label>Inicial que darías <b id="crIniV"></b></label><input type="range" id="crIni" min="0" max="90000" step="500">
+   <label>Tasa anual del banco <b id="crTasaV"></b></label><input type="range" id="crTasa" min="0" max="35" step="0.5">
+   <label>Plazo</label><div class="seg" id="crPlazo"></div>
+   <label>Tu tope de cuota <b id="crTopeV"></b></label><input type="range" id="crTope" min="300" max="1500" step="25">
+  </div>
+  <div class="card"><h3>¿Cuándo tienes la inicial?</h3><div class="sub" id="crWhenS"></div><div class="bar big-bar" style="margin:14px 0 8px"><i id="crBar"></i></div><div id="crWhen" style="font-size:13.5px;line-height:1.55"></div>
+   <div class="sub" style="margin-top:12px">Estimación para planificar; confirma tasa, plazo y condiciones con el banco.</div></div>
+ </section>`);
+ /* bloques en Resumen y Meta */
+ const vr=q('#v-resumen'),cb=q('#closeBox');
+ cb.insertAdjacentHTML('afterend',`<div class="x5row" id="x5chips"></div>
+  <div class="card bcvmini" id="bcvMini"><span class="fl">🇻🇪</span><span style="flex:1"><small>Dólar oficial BCV</small><b class="num" id="bcvMiniV">—</b><small id="bcvMiniF"></small></span><span style="color:var(--blue2);font-weight:800">Calcular →</span></div>
+  <button class="card storybtn" id="stBtn" style="margin-bottom:16px"><span class="pl">▶</span><span style="flex:1"><b style="font-family:var(--fd);font-size:15.5px">Tu mes en historia</b><span style="display:block;color:var(--muted);font-size:12.5px">Un resumen animado de cómo te fue</span></span></button>
+  <div class="card" id="retoCard" style="margin-bottom:16px"><div style="display:flex;justify-content:space-between;gap:10px;align-items:flex-start"><div><h3>🐜 Reto: 7 días sin gastos hormiga</h3><div class="sub" id="retoS"></div></div><b class="num" id="retoN" style="font-family:var(--fd);font-size:22px"></b></div><div class="dots7" id="retoD"></div></div>`);
+ q('#v-meta').insertAdjacentHTML('afterbegin',`<div class="card" style="margin-bottom:16px"><div style="display:flex;justify-content:space-between;align-items:center;gap:10px"><div><h3>👛 Tus bolsillos</h3><div class="sub">Primero se llena la emergencia; lo demás va al carro</div></div><button class="chip" data-go2="carro">🚗 Calculadora</button></div><div id="pkList"></div>
+  <div style="display:flex;gap:8px;margin-top:10px"><input class="field num" id="vjAmt" inputmode="decimal" placeholder="Abonar al viaje ($)" style="flex:1"><button class="btn" id="vjAdd">＋ Abonar</button></div></div>
+  <div class="card" style="margin-bottom:16px"><h3>📈 Tres caminos a $50K</h3><div class="sub" id="scS"></div><div style="height:200px"><canvas id="cScn"></canvas></div><div class="scn" id="scN"></div></div>`);
+ /* barra lateral (computadora) y hoja «Más» */
+ const foot=q('#sideFoot');[['bcv','🇻🇪','Dólar BCV'],['carro','🚗','Calculadora del carro']].forEach(([v,e,n])=>foot.insertAdjacentHTML('beforebegin',`<button class="nav" data-v="${v}"><span class="ic">${e}</span>${n}</button>`));
+ q('#mMore .tiles').insertAdjacentHTML('beforeend',`<button data-g="bcv"><span class="e">🇻🇪</span><b>Dólar BCV</b><small>Tasa oficial y calculadora</small></button><button data-g="carro"><span class="e">🚗</span><b>Carro</b><small>Cuota, inicial y plazo</small></button>`);
+ q('.acts').insertAdjacentHTML('afterbegin','<button class="eye" id="eyeBtn" title="Ocultar cifras">👁</button>');
+ qa('.side [data-v="bcv"],.side [data-v="carro"]').forEach(b=>b.onclick=()=>go(b.dataset.v));
+ document.addEventListener('click',e=>{const b=e.target.closest('[data-go2]');if(b)go(b.dataset.go2)});
+ Object.assign(VIEWS,{bcv:['Dólar BCV','Tasa oficial del Banco Central de Venezuela'],carro:['Calculadora del carro','Cuota, inicial y plazo con tu tope']});
+
+ /* ---------- modo privado ---------- */
+ const setPriv=on=>{document.body.classList.toggle('priv',on);q('#eyeBtn').textContent=on?'🙈':'👁';try{localStorage.setItem('mf-priv',on?'1':'')}catch(e){}};
+ setPriv(!!localStorage.getItem('mf-priv'));q('#eyeBtn').onclick=()=>{setPriv(!document.body.classList.contains('priv'));toast(document.body.classList.contains('priv')?'🙈 Cifras ocultas':'👁 Cifras visibles')};
+
+ /* ---------- Dólar BCV ---------- */
+ let B=null;try{B=JSON.parse(localStorage.getItem('mf-bcv')||'null')}catch(e){}
+ const rate=()=>{const m=pnum(q('#bcvMan').value);return m>0?m:(B&&B.usd)||0};
+ async function loadBcv(){try{const r=await fetch('tasa.json',{cache:'no-store'});if(r.ok){const j=await r.json();if(j&&j.usd){B=j;localStorage.setItem('mf-bcv',JSON.stringify(j))}}}catch(e){}paintBcv()}
+ function paintBcv(){const r=rate(),man=pnum(q('#bcvMan').value)>0;
+  const txt=B?`Fecha valor: ${fdate(B.fecha_valor)||B.fecha_texto||'—'}`:'Aún no se ha descargado la tasa';
+  q('#bcvMiniV').textContent=r?'Bs '+bs(r):'—';q('#bcvMiniF').textContent=man?'Con tu tasa manual':txt;
+  if(S.view!=='bcv')return;
+  q('#bcvRate').textContent=r?'Bs '+bs(r):'—';
+  q('#bcvF').innerHTML=man?'Usando tu tasa manual':B?`${txt} · actualizado ${new Date(B.actualizado).toLocaleString('es-VE',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})}`:'Sin conexión todavía: escribe una tasa abajo';
+  q('#cvEur').innerHTML=B&&B.eur&&!man?`Euro oficial: <b>Bs ${bs(B.eur)}</b>`:'';
+  q('#cvQ').innerHTML=[1,5,10,20,50,100].map(v=>`<button class="chip" data-q="${v}">$${v}</button>`).join('');
+  qa('#cvQ [data-q]').forEach(b=>b.onclick=()=>{q('#cvUsd').value=b.dataset.q;conv('u')});
+  conv(lastSide);
+  const h=(B&&B.historial)||[];q('#bcvHS').textContent=h.length>1?`${h.length} días registrados · ${h[0].usd<h[h.length-1].usd?'subió':'bajó'} ${bs(Math.abs(h[h.length-1].usd-h[0].usd))} Bs desde el ${fdate(h[0].fecha)}`:'El historial se va llenando día a día';
+  if(h.length>1)mk('cBcv',{type:'line',data:{labels:h.map(x=>fdate(x.fecha).slice(0,6)),datasets:[{data:h.map(x=>x.usd),borderColor:'#5B9BFF',backgroundColor:'rgba(47,123,255,.15)',fill:true,tension:.35,pointRadius:0,borderWidth:2.5}]},options:{maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false}},y:{grid:{color:'rgba(255,255,255,.05)'}}}}})}
+ let lastSide='u';
+ function conv(side){lastSide=side;const r=rate();if(!r)return;
+  if(side==='u'){const u=pnum(q('#cvUsd').value);q('#cvBs').value=u?bs(u*r):''}else{const b=pnum(q('#cvBs').value);q('#cvUsd').value=b?(b/r).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}):''}}
+ q('#cvUsd').oninput=()=>conv('u');q('#cvBs').oninput=()=>conv('b');q('#bcvMan').oninput=paintBcv;
+ q('#cvSwap').onclick=()=>{q('#cvSwap').classList.toggle('r');(lastSide==='u'?q('#cvBs'):q('#cvUsd')).focus()};
+ q('#bcvMini').onclick=()=>go('bcv');
+
+ /* ---------- carro ---------- */
+ const pay=(L,t,n)=>{const r=t/1200;return L<=0?0:r?L*r/(1-Math.pow(1+r,-n)):L/n};
+ const maxLoan=(top,t,n)=>{const r=t/1200;return r?top*(1-Math.pow(1+r,-n))/r:top*n};
+ function rCar(){const c=X().car,mx=maxLoan(c.tope,c.tasa,c.plazo),minIni=Math.max(0,Math.ceil((c.precio-mx)/100)*100);if(c.inicial==null)c.inicial=Math.min(c.precio,Math.ceil(minIni/500)*500);
+  const ini=Math.min(c.inicial,c.precio),L=c.precio-ini,cu=pay(L,c.tasa,c.plazo),it=cu*c.plazo-L,ok=cu<=c.tope+0.5;
+  q('#crPrecio').value=c.precio;q('#crIni').max=c.precio;q('#crIni').value=ini;q('#crTasa').value=c.tasa;q('#crTope').value=c.tope;
+  q('#crPrecioV').textContent=fmt(c.precio);q('#crIniV').textContent=fmt(ini)+` (${Math.round(ini/c.precio*100)}%)`;q('#crTasaV').textContent=c.tasa+'%';q('#crTopeV').textContent=fmt(c.tope)+'/mes';
+  q('#crPlazo').innerHTML=[36,48,60,72].map(n=>`<button class="${n===c.plazo?'on':''}" data-n="${n}">${n/12} años</button>`).join('');
+  qa('#crPlazo button').forEach(b=>b.onclick=()=>{c.plazo=+b.dataset.n;saveLocal();rCar()});
+  q('#crCuota').textContent=fmt(cu);q('#crCuotaF').innerHTML=ok?`<span style="color:#D6E4FF">✓ Dentro de tu tope de ${fmt(c.tope)}</span>`:`Pasa tu tope por ${fmt(cu-c.tope)}`;
+  q('#crLoan').textContent=fmt(L);q('#crLoanF').textContent=`${Math.round(L/c.precio*100)}% del precio a ${c.plazo} meses`;
+  q('#crInt').textContent=fmt(it);q('#crIntF').textContent=`Pagas ${fmt(cu*c.plazo+ini)} en total`;
+  q('#crMin').textContent=fmt(minIni);q('#crMinF').textContent=`Préstamo máximo con ${fmt(c.tope)}/mes: ${fmt(mx)}`;
+  const g=goalState(),have=g.saved||0,mo=goalPlan(g).contribNow||g.monthly||0,need=Math.max(ini,minIni),gap=Math.max(0,need-have),m=mo>0?Math.ceil(gap/mo):null;
+  q('#crWhenS').textContent=`Tienes ahorrado ${fmt(have)} y aportas unos ${fmt(mo)} al mes`;
+  q('#crBar').style.width=Math.min(100,need?have/need*100:100)+'%';
+  q('#crWhen').innerHTML=gap<=0?`<b class="pos">¡Ya tienes la inicial de ${fmt(need)}!</b>`:`Te faltan <b>${fmt(gap)}</b> para una inicial de ${fmt(need)}. ${m?`A tu ritmo, en unos <b>${m} meses</b> (${m>=12?(m/12).toFixed(1)+' años':'menos de un año'}).`:'Define tu aporte mensual en la Meta para estimar cuándo.'}`;
+}
+ [['#crPrecio','precio'],['#crIni','inicial'],['#crTasa','tasa'],['#crTope','tope']].forEach(([s,k])=>q(s).oninput=e=>{X().car[k]=+e.target.value;if(k==='precio'&&X().car.inicial>X().car.precio)X().car.inicial=X().car.precio;rCar();clearTimeout(rCar.t);rCar.t=setTimeout(saveLocal,400)});
+
+ /* ---------- bolsillos y escenarios (Meta) ---------- */
+ function rPockets(){const x=X(),E=efInfo(),tot=D.sav.total||0,em=Math.min(tot,E.goal),car=Math.max(0,tot-E.goal);
+  const P=[['🛟','Emergencia',em,E.goal,`${E.m} ${E.m>1?'meses':'mes'} de gastos`],['🚗','Carro (Meta $50K)',car,50000,'Lo que pasa de la emergencia'],['✈️','Viaje',x.viaje.saldo,x.viaje.meta,'Toca la meta para cambiarla']];
+  q('#pkList').innerHTML=P.map((p,i)=>`<div class="pk"><span class="e">${p[0]}</span><div><b>${p[1]}</b><small>${p[4]}</small><div class="bar"><i style="width:${Math.min(100,p[3]?p[2]/p[3]*100:0)}%"></i></div></div><div class="v"><span class="num">${fmt(p[2])}</span><small ${i==2?'data-vm style="cursor:pointer;color:var(--blue2)"':''}>de ${fmt(p[3])}</small></div></div>`).join('');
+  const vm=q('[data-vm]');if(vm)vm.onclick=()=>{const v=prompt('Meta del fondo de viaje (USD)',x.viaje.meta);if(v!=null&&pnum(v)>0){x.viaje.meta=pnum(v);saveLocal();rPockets()}}}
+ q('#vjAdd').onclick=()=>{const a=pnum(q('#vjAmt').value);if(!a)return toast('Escribe cuánto abonas');const x=X();x.viaje.saldo=Math.round((x.viaje.saldo+a)*100)/100;q('#vjAmt').value='';saveLocal();rPockets();toast(`✈️ ${fmt(a)} al fondo de viaje`)};
+ function rScen(){const g=goalState(),r=(g.ret||0)/1200,sv=g.saved||0,S3=[500,700,900],cols=['#5E6475','#5B9BFF','#2FE0A1'];
+  const sims=S3.map(m=>{let b=sv,s=[b],hit=null;for(let t=1;t<=120;t++){b=b*(1+r)+m;s.push(b);if(b>=50000&&!hit)hit=t}return{m,s,hit}});
+  const L=Math.min(120,Math.max(...sims.map(x=>x.hit||120))+3);
+  q('#scS').textContent=`Desde tus ${fmt(sv)} de hoy, ahorrando cada mes:`;
+  q('#scN').innerHTML=sims.map((x,i)=>`<div><span>${fmt(x.m)}/mes</span><b style="color:${cols[i]}">${x.hit?(x.hit>=12?(x.hit/12).toFixed(1)+' años':x.hit+' meses'):'+10 años'}</b></div>`).join('');
+  mk('cScn',{type:'line',data:{labels:Array.from({length:L+1},(_,i)=>i%12===0?(i/12)+'a':''),datasets:sims.map((x,i)=>({label:fmt(x.m)+'/mes',data:x.s.slice(0,L+1),borderColor:cols[i],borderWidth:2.5,pointRadius:0,tension:.3})).concat([{label:'$50K',data:Array(L+1).fill(50000),borderColor:'rgba(255,255,255,.25)',borderDash:[6,6],borderWidth:1.5,pointRadius:0}])},
+   options:{maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+c.dataset.label+': '+fmt(c.raw)}}},scales:{x:{grid:{display:false},ticks:{autoSkip:false,maxRotation:0}},y:{grid:{color:'rgba(255,255,255,.05)'},ticks:{callback:v=>'$'+v/1000+'K'}}}}})}
+
+ /* ---------- racha, reto, fijos y alertas (Resumen) ---------- */
+ const dayKey=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+ function streak(){const set=new Set([...D.tx,...D.inc].map(t=>t.d));let d=new Date(),n=0;if(!set.has(dayKey(d)))d.setDate(d.getDate()-1);while(set.has(dayKey(d))){n++;d.setDate(d.getDate()-1)}return n}
+ function reto(){const fix=new Set((D.cfg.fijos||[]).map(f=>f.c)),small=D.tx.filter(t=>t.a<5&&ty(t.c)!=='ahorro'&&ty(t.c)!=='fuera'&&!fix.has(t.c)).map(t=>t.d).sort();
+  const first=[...D.tx,...D.inc].map(t=>t.d).sort()[0];if(!first)return 0;const from=small.length?small[small.length-1]:first;
+  return Math.max(0,Math.min(7,Math.floor((new Date(today())-new Date(from))/864e5)))}
+ function rRes(){const st=streak(),k=curKey(),paid=new Set(txOf(k).map(t=>t.c)),pend=(D.cfg.fijos||[]).filter(f=>!paid.has(f.c));
+  q('#x5chips').innerHTML=`<span class="x5chip">🔥 ${st} ${st===1?'día':'días'} registrando</span>`+(S.cur===k&&pend.length?`<button class="x5chip warn" id="fixChip">📌 ${pend.length} ${pend.length>1?'gastos fijos':'gasto fijo'} sin anotar este mes →</button>`:'');
+  const fc=q('#fixChip');if(fc)fc.onclick=()=>{try{openFix()}catch(e){go('gastos')}};
+  const n=reto();q('#retoN').textContent=n+'/7';q('#retoS').textContent=n>=7?'¡Lo lograste! Sigue así o empieza de nuevo el reto.':'Días seguidos sin compras pequeñas (menos de $5) fuera de tus fijos.';
+  q('#retoD').innerHTML=Array.from({length:7},(_,i)=>`<i class="${i<n?'on':''}" style="animation-delay:${i*.06}s"></i>`).join('');paintBcv()}
+ function alerts(){if(S.cur!==curKey())return;const k=S.cur,T=totals(k),x=X();let msg=null;
+  D.bud.forEach(b=>{const c=b.c,bv=budOf(c,k);if(!bv||ty(c)==='ahorro'||ty(c)==='fuera')return;const p=(T.by[c]||0)/bv,lv=p>=1?100:p>=.8?80:0;if(!lv)return;const key=k+'|'+c+'|'+lv;if(x.al[key])return;x.al[key]=1;if(!msg||lv===100)msg=lv===100?`🚨 ${c}: ya pasaste tu presupuesto (${fmt(T.by[c])} de ${fmt(bv)})`:`⚠️ ${c}: llevas el ${Math.round(p*100)}% del presupuesto`});
+  if(msg){saveLocal();setTimeout(()=>toast(msg),700)}}
+
+ /* ---------- tu mes en historia ---------- */
+ let SI=0,SL=[],ST=null;
+ function slides(k){const T=totals(k),RI=rateInfo(k),rp=RI.inc?Math.round(RI.real/RI.inc*100):0,ms=monthsList().filter(x=>x<k&&(txOf(x).length||incOf(x).length)),prev=ms[ms.length-1];
+  const prp=prev?(()=>{const R=rateInfo(prev);return R.inc?Math.round(R.real/R.inc*100):0})():null;
+  const top=Object.entries(T.by).filter(([c,v])=>v>0&&ty(c)!=='ahorro'&&ty(c)!=='fuera').sort((a,b)=>b[1]-a[1]);
+  const card=payoff(D.card.bal,D.card.apr,D.card.pay),g=goalState(),pct=Math.min(100,(D.sav.total||0)/500);
+  const L=[{em:'💙',k:mLabel(k),t:'Así te fue este mes',s:'Toca para ver tu historia'},
+   {em:'💵',k:'Entró',v:fmt(T.income||T.eff),s:T.income?'Entre sueldo, bonos y abonos':'Estimado con tu sueldo planificado'},
+   {em:'🛒',k:'Gastaste',v:fmt(T.consumo),s:`El ${Math.round(T.consumo/(T.eff||1)*100)||0}% de lo que entró`}];
+  if(top[0])L.push({em:ic(top[0][0]),k:'Tu mayor gasto',t:top[0][0],v:fmt(top[0][1]),s:top[1]?`Le siguen ${top[1][0]}${top[2]?' y '+top[2][0]:''}`:''});
+  L.push({em:'🐷',k:'Ahorraste',v:fmt(T.sav),s:`Tasa de ahorro: ${rp}%`+(prp!=null?` · ${rp>=prp?'⬆️':'⬇️'} ${Math.abs(rp-prp)} puntos vs. ${mLabel(prev).toLowerCase()}`:'')});
+  if(D.card.bal>0)L.push({em:'💳',k:'Tarjeta',v:fmt(D.card.bal),s:card.n===Infinity?'Sube el pago para que baje':`Al ritmo actual, libre en ${card.n} meses`});
+  L.push({em:'🎯',k:'Meta $50K',v:Math.round(pct)+'%',s:`Llevas ${fmt(D.sav.total||0)}. ${pct>=100?'¡Lo lograste!':'Cada mes cuenta 💪'}`});
+  return L}
+ function showSlide(i){SI=i;const s=SL[i];clearTimeout(ST);
+  q('#stSegs').innerHTML=SL.map((_,j)=>`<i class="${j<i?'done':j===i?'cur':''}"><b></b></i>`).join('');
+  q('#stSlide').outerHTML=`<div class="slide" id="stSlide"><div class="em">${s.em}</div><div class="k">${esc(s.k)}</div>${s.t?`<div class="t">${esc(s.t)}</div>`:''}${s.v?`<div class="bigv num">${s.v}</div>`:''}${s.s?`<div class="s">${esc(s.s)}</div>`:''}</div>`;
+  const bv=q('#stSlide .bigv');if(bv){bv._v=0;const t=bv.textContent,m=t.match(/^(\D*)([\d,]+)(.*)$/);if(m){const to=+m[2].replace(/,/g,''),t0=performance.now();const f=n=>{const p=Math.min(1,(n-t0)/900),v=Math.round(to*(1-Math.pow(1-p,3)));bv.textContent=m[1]+v.toLocaleString('en-US')+m[3];if(p<1)requestAnimationFrame(f)};requestAnimationFrame(f)}}
+  ST=setTimeout(()=>{if(SI<SL.length-1)showSlide(SI+1)},5000)}
+ function openStory(){SL=slides(S.cur);q('#story').classList.add('on');showSlide(0)}
+ const closeStory=()=>{clearTimeout(ST);q('#story').classList.remove('on')};
+ q('#stBtn').onclick=openStory;q('#stX').onclick=e=>{e.stopPropagation();closeStory()};
+ q('#story').onclick=e=>{if(e.target.closest('#stX'))return;const right=e.clientX>innerWidth*0.35;if(right){SI<SL.length-1?showSlide(SI+1):closeStory()}else showSlide(Math.max(0,SI-1))};
+
+ /* ---------- enganche con la app ---------- */
+ const EXTRA={bcv:()=>paintBcv(),carro:rCar};
+ const _r=window.render;
+ window.render=function(){if(!D)return;X();if(EXTRA[S.view]){q('#mLabel').textContent=mLabel(S.cur);EXTRA[S.view]();const v=q('.view.on');return}
+  _r.apply(this,arguments);if(S.view==='resumen')rRes();if(S.view==='meta'){rPockets();rScen()}alerts()};
+ loadBcv();setInterval(loadBcv,30*60*1000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)loadBcv()});
+ setTimeout(()=>{try{render()}catch(e){}},80);
 })();
 </script>
 

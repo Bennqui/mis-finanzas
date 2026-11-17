@@ -1,6 +1,6 @@
 /* Mis Finanzas: funciona sin conexión. La app se guarda en el teléfono y se actualiza sola cuando hay internet.
    Tus datos NO pasan por aquí: viven en el almacenamiento del teléfono. */
-const V='mf-v2';
+const V='mf-v3';
 const BASE=['./','index.html','manifest.webmanifest','icon-180.png','icon-192.png','icon-512.png'];
 const CDN=['https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(V).then(c=>c.addAll(BASE).then(()=>Promise.all(CDN.map(u=>fetch(u,{mode:'no-cors'}).then(r=>c.put(u,r)).catch(()=>{}))))).then(()=>self.skipWaiting()))});
@@ -8,6 +8,9 @@ self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(k=>Promise.a
 self.addEventListener('fetch',e=>{
   const r=e.request;if(r.method!=='GET')return;
   const u=new URL(r.url);
+  if(u.origin===location.origin&&u.pathname.endsWith('/tasa.json')){ /* la tasa del BCV: siempre primero internet */
+    e.respondWith(fetch(r).then(res=>{const cp=res.clone();caches.open(V).then(c=>c.put('tasa.json',cp));return res}).catch(()=>caches.match('tasa.json')));return;
+  }
   if(r.mode==='navigate'){
     e.respondWith(fetch(r).then(res=>{const cp=res.clone();caches.open(V).then(c=>c.put('index.html',cp));return res}).catch(()=>caches.match('index.html')));
     return;

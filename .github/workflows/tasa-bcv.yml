@@ -35,6 +35,12 @@ jobs:
             sleep 20
           done
           [ "$ok" = 1 ] || { echo "No pude descargar bcv.org.ve"; exit 1; }
+      - name: Revisar la página
+        run: |
+          echo "Tamaño: $(wc -c < bcv.html)"; head -c 600 bcv.html; echo; echo ----
+          grep -o -i 'id="dolar".\{0,400\}' bcv.html | head -2 || true; echo ----
+          grep -o -i '.\{0,200\}USD.\{0,300\}' bcv.html | head -3 || true; echo ----
+          grep -o -i 'Fecha Valor.\{0,300\}' bcv.html | head -2 || true
       - name: Leer la tasa
         run: python3 tareas/tasa_bcv.py bcv.html
       - name: Guardar
