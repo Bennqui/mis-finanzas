@@ -1,6 +1,6 @@
 /* Mis Finanzas: funciona sin conexión. La app se guarda en el teléfono y se actualiza sola cuando hay internet.
    Tus datos NO pasan por aquí: viven en el almacenamiento del teléfono. */
-const V='mf-v5';
+const V='mf-v6';
 const BASE=['./','index.html','manifest.webmanifest','icon-180.png','icon-192.png','icon-512.png'];
 const CDN=['https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(V).then(c=>c.addAll(BASE).then(()=>Promise.all(CDN.map(u=>fetch(u,{mode:'no-cors'}).then(r=>c.put(u,r)).catch(()=>{}))))).then(()=>self.skipWaiting()))});

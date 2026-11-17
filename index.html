@@ -1341,7 +1341,7 @@ input:focus,select:focus{border-color:var(--blue)!important;box-shadow:0 0 0 3px
 .msheet{display:none}
 @media (max-width:760px){
  .mobnav,.fab{display:none!important}
- main{padding:calc(14px + env(safe-area-inset-top,0px)) 14px 120px}
+ main{padding:10px 14px 120px}
  .top{margin-bottom:16px}
  .top h1{font-size:27px}
  .dock{display:flex;position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);width:min(calc(100% - 24px),430px);height:68px;padding:6px;border-radius:26px;align-items:center;justify-content:space-between;z-index:45;
@@ -1421,6 +1421,12 @@ input:focus,select:focus{border-color:var(--blue)!important;box-shadow:0 0 0 3px
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%}html,body{overflow-x:hidden}
 input,select,textarea,.field{font-size:16px!important}
 .grid>*,.card,.qa>*{min-width:0}
+/* En Safari un elemento ancho (un campo grande, una fila sin cortes) estiraba la columna: la columna nunca puede pasar del ancho de la pantalla. */
+.app{grid-template-columns:minmax(0,1fr)}main,section.view,.top,.top>*,.banner,.banner>*{min-width:0;max-width:100%}
+.banner #bannerTxt{overflow-wrap:anywhere}
+input,select,textarea,.field{max-width:100%;min-width:0}
+.conv .inp input{width:0}
+@media (min-width:761px){.app{grid-template-columns:232px minmax(0,1fr)}}
 .ring canvas,canvas{max-width:100%!important}
 @media (max-width:760px){.view table{display:block;overflow-x:auto;max-width:100%;-webkit-overflow-scrolling:touch}}
 .conv .inp input{font-size:30px!important}
