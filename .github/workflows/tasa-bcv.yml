@@ -5,6 +5,9 @@ on:
     - cron: '7 11,15,19,21,23 * * 1-5'   # días hábiles: 7:07, 11:07, 15:07, 17:07 y 19:07 hora de Venezuela
     - cron: '17 13 * * 0,6'              # fines de semana, una vez
   workflow_dispatch: {}
+  push:
+    branches: [main]
+    paths: ['.github/workflows/tasa-bcv.yml','tareas/tasa_bcv.py']
 permissions:
   contents: write
 concurrency: tasa-bcv
