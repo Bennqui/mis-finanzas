@@ -1420,6 +1420,9 @@ input:focus,select:focus{border-color:var(--blue)!important;box-shadow:0 0 0 3px
 /* El iPhone hace zoom al tocar un campo con letra menor de 16px: todos los campos usan 16px o más. */
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%}html,body{overflow-x:hidden}
 input,select,textarea,.field{font-size:16px!important}
+.grid>*,.card,.qa>*{min-width:0}
+.ring canvas,canvas{max-width:100%!important}
+@media (max-width:760px){.view table{display:block;overflow-x:auto;max-width:100%;-webkit-overflow-scrolling:touch}}
 .conv .inp input{font-size:30px!important}
 
 .x5row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
