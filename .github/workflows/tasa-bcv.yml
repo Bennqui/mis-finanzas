@@ -1,0 +1,42 @@
+name: Tasa BCV
+# Lee la tasa oficial del Banco Central de Venezuela y la guarda en tasa.json para la app.
+on:
+  schedule:
+    - cron: '7 11,15,19,21,23 * * 1-5'   # días hábiles: 7:07, 11:07, 15:07, 17:07 y 19:07 hora de Venezuela
+    - cron: '17 13 * * 0,6'              # fines de semana, una vez
+  workflow_dispatch: {}
+permissions:
+  contents: write
+concurrency: tasa-bcv
+jobs:
+  tasa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Descargar la página del BCV
+        run: |
+          URL=https://www.bcv.org.ve/
+          ok=0
+          for i in 1 2 3; do
+            if curl -fsSL --max-time 60 -A "Mozilla/5.0" "$URL" -o bcv.html; then ok=1; break; fi
+            # El sitio del BCV a veces no envía su certificado intermedio: lo bajamos de la dirección que indica su propio certificado
+            # y verificamos igual contra las autoridades del sistema (no se desactiva la verificación).
+            echo | openssl s_client -connect www.bcv.org.ve:443 -servername www.bcv.org.ve 2>/dev/null | openssl x509 -outform PEM > leaf.pem || true
+            AIA=$(openssl x509 -in leaf.pem -noout -text 2>/dev/null | grep "CA Issuers" | head -1 | sed 's/.*URI://')
+            if [ -n "$AIA" ] && curl -fsSL --max-time 30 "$AIA" -o inter.bin; then
+              openssl x509 -inform DER -in inter.bin -out inter.pem 2>/dev/null || cp inter.bin inter.pem
+              cat /etc/ssl/certs/ca-certificates.crt inter.pem > bundle.pem
+              if curl -fsSL --max-time 60 -A "Mozilla/5.0" --cacert bundle.pem "$URL" -o bcv.html; then ok=1; break; fi
+            fi
+            sleep 20
+          done
+          [ "$ok" = 1 ] || { echo "No pude descargar bcv.org.ve"; exit 1; }
+      - name: Leer la tasa
+        run: python3 tareas/tasa_bcv.py bcv.html
+      - name: Guardar
+        run: |
+          rm -f bcv.html leaf.pem inter.bin inter.pem bundle.pem
+          if git diff --quiet -- tasa.json 2>/dev/null && git ls-files --error-unmatch tasa.json >/dev/null 2>&1; then echo "Sin cambios"; exit 0; fi
+          git config user.name "Tasa BCV"; git config user.email "actions@users.noreply.github.com"
+          git add tasa.json && git commit -m "Tasa BCV $(python3 -c "import json;d=json.load(open('tasa.json'));print(d['usd'],d['fecha_valor'])")" && git push
