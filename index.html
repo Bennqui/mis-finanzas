@@ -8,7 +8,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Mis Finanzas">
-<meta name="theme-color" content="#060b17">
+<meta name="theme-color" content="#000000">
 <meta name="robots" content="noindex">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icon-180.png">
@@ -311,7 +311,7 @@ input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;bac
 
   <main>
     <div class="top">
-      <div><h1 id="title">Hola 👋</h1><p id="subtitle">Así va tu mes</p></div>
+      <div><h1 id="title">Hola, Cesar</h1><p id="subtitle">Así va tu mes</p></div>
       <div class="acts" style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
         <div class="sync" id="sync"><span class="led"></span><span id="syncTxt">En este teléfono</span><button id="syncBtn" title="Respaldo">💾</button></div>
         <div class="month" id="monthBox"><button id="mPrev">‹</button><span id="mLabel" class="num"></span><button id="mNext">›</button></div>
@@ -824,7 +824,7 @@ function reminders(){const k=curKey(),day=+today().slice(8);const txs=txOf(k);
 function monthsList(){const s=new Set([curKey(),S.cur]);D.tx.forEach(t=>t.d&&s.add(t.d.slice(0,7)));D.inc.forEach(t=>t.d&&s.add(t.d.slice(0,7)));return[...s].filter(k=>k&&k>=START).sort()}
 
 /* ================= NAVEGACIÓN ================= */
-const VIEWS={resumen:['Hola 👋','Así va tu mes'],gastos:['Gastos e ingresos','Registra y compara contra tu presupuesto'],historial:['Mes a mes','Cómo vas mejorando'],compartidos:['Fondos compartidos','Dinero de tu familia en tus cuentas'],tarjeta:['Tarjeta BoFA','Tu plan para salir de la deuda'],meta:['Meta $50K','Tu plan de ahorro, ajustable'],patrimonio:['Patrimonio neto','Lo que tienes menos lo que debes']};
+const VIEWS={resumen:['Hola, Cesar','Así va tu mes'],gastos:['Gastos e ingresos','Registra y compara contra tu presupuesto'],historial:['Mes a mes','Cómo vas mejorando'],compartidos:['Fondos compartidos','Dinero de tu familia en tus cuentas'],tarjeta:['Tarjeta BoFA','Tu plan para salir de la deuda'],meta:['Meta $50K','Tu plan de ahorro, ajustable'],patrimonio:['Patrimonio neto','Lo que tienes menos lo que debes']};
 function go(v){if(!VIEWS[v])v='resumen';S.view=v;document.querySelectorAll('[data-v]').forEach(b=>b.classList.toggle('on',b.dataset.v===v));
   document.querySelectorAll('.view').forEach(s=>s.classList.toggle('on',s.id==='v-'+v));$('title').textContent=VIEWS[v][0];$('subtitle').textContent=VIEWS[v][1];
   $('monthBox').style.display=(v==='resumen'||v==='gastos')?'flex':'none';if(location.hash!=='#'+v)history.replaceState(null,'','#'+v);render();window.scrollTo({top:0})}
@@ -845,7 +845,7 @@ function rResumen(){const T=totals(S.cur);const byK={};incOf(S.cur).forEach(i=>b
   $('kLeft').textContent=fmt(T.left);$('kLeft').className='val num '+(T.left<0?'neg':T.left>0?'pos':'');
   $('kLeftF').textContent=T.est?'Estimado con tu sueldo planificado':T.left<0?'Gastaste más de lo que entró':T.left===0?'Todo asignado':'Sin asignar todavía';
   const items=Object.entries(T.by).filter(([k,v])=>v>0&&ty(k)!=='ahorro'&&ty(k)!=='fuera').sort((a,b)=>b[1]-a[1]);
-  mk('cDonut',{type:'doughnut',data:{labels:items.map(i=>i[0]),datasets:[{data:items.map(i=>i[1]),backgroundColor:items.map((_,i)=>PAL[i%PAL.length]),borderColor:'#0c1529',borderWidth:3,hoverOffset:8}]},
+  mk('cDonut',{type:'doughnut',data:{labels:items.map(i=>i[0]),datasets:[{data:items.map(i=>i[1]),backgroundColor:items.map((_,i)=>PAL[i%PAL.length]),borderColor:'#0B0B0E',borderWidth:3,hoverOffset:8}]},
     options:{cutout:'68%',maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+c.label+': '+fmt(c.raw)}}}}});
   $('donutLegend').innerHTML=items.length?items.slice(0,7).map(([k,v],i)=>`<div style="display:flex;align-items:center;gap:9px;padding:6px 0;font-size:13px"><span class="dot" style="background:${PAL[i%PAL.length]}"></span><span style="flex:1">${ic(k)} ${esc(k)}</span><b class="num">${fmt(v)}</b><span class="num" style="color:var(--muted);width:38px;text-align:right">${Math.round(v/T.consumo*100)}%</span></div>`).join(''):'<div style="color:var(--muted)">Aún no hay gastos este mes. Toca <b>＋ Agregar</b>.</div>';
   // alertas
@@ -873,7 +873,7 @@ function rResumen(){const T=totals(S.cur);const byK={};incOf(S.cur).forEach(i=>b
   $('rNetRows').innerHTML=[['🟢 Ahorros (incluye Earn)',nw.assets,'pos'],['🔴 Tarjeta BoFA',-nw.deuda,'neg'],['🔴 Debes a la cuenta familiar',-nw.fam,'neg']].map(r=>`<div class="nw-row"><span>${r[0]}</span><b class="num ${r[2]}">${fmt(r[1])}</b></div>`).join('');
   // meta
   const g=goalState(),P=goalPlan(g);
-  mk('cRing',{type:'doughnut',data:{datasets:[{data:[g.saved,Math.max(0,50000-g.saved)],backgroundColor:['#3b82f6','#172646'],borderWidth:0}]},options:{cutout:'80%',plugins:{legend:{display:false},tooltip:{enabled:false}},maintainAspectRatio:false}});
+  mk('cRing',{type:'doughnut',data:{datasets:[{data:[g.saved,Math.max(0,50000-g.saved)],backgroundColor:['#3b82f6','#1A1A21'],borderWidth:0}]},options:{cutout:'80%',plugins:{legend:{display:false},tooltip:{enabled:false}},maintainAspectRatio:false}});
   $('rGoalPct').textContent=(g.saved/500).toFixed(1)+'%';$('rGoalSub').textContent=`${fmt(g.saved)} de $50,000`;
   $('rGoalEta').innerHTML=P.hit?`Con tu plan actual llegas en <b class="blu">${dLabel(addMonths(P.hit))}</b>`:'Ajusta tu plan en la pestaña Meta';
   // tarjeta
@@ -1275,5 +1275,145 @@ if(navigator.storage&&navigator.storage.persist)navigator.storage.persist().catc
 if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
 
 </script>
+<!-- ===== Capa v4: identidad propia (negro puro + azul eléctrico), dock flotante y transiciones ===== -->
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style id="v4">
+/* Negro puro de pantalla OLED, tarjetas apenas visibles y un solo color protagonista: el azul eléctrico.
+   Sora (geométrica, de fintech) para títulos y cifras; Manrope para leer. */
+:root{--bg:#000;--surface:#0B0B0E;--surface2:#131318;--surface3:#1B1B22;--border:#1D1D25;--text:#F4F6FB;--muted:#8E95A8;--dim:#5E6475;
+--blue:#2F7BFF;--blue2:#5B9BFF;--blue3:#9CC2FF;--navy:#0B2A66;--cyan:#38D5FF;--green:#2FE0A1;--amber:#FFB547;--red:#FF5C6C;--violet:#9D8CFF;--r:22px;
+--fd:'Sora',system-ui,sans-serif;--fb:'Manrope',system-ui,sans-serif;--spring:cubic-bezier(.2,.9,.25,1.12)}
+[hidden]{display:none!important}
+html,body{background:#000;font-family:var(--fb);font-size:14.5px}
+body{background:#000}
+body::before{content:"";position:fixed;inset:-20% -20% auto -20%;height:70vh;z-index:-1;pointer-events:none;
+ background:radial-gradient(40% 50% at 30% 30%,rgba(47,123,255,.22),transparent 70%),radial-gradient(35% 45% at 75% 20%,rgba(56,213,255,.10),transparent 70%);
+ filter:blur(10px);animation:aurora 18s ease-in-out infinite alternate}
+@keyframes aurora{from{transform:translate3d(-4%,0,0) scale(1)}to{transform:translate3d(6%,4%,0) scale(1.12)}}
+h1,h2,h3,.val,.big,.num,.brand b,.dock span{font-family:var(--fd)}
+.num{letter-spacing:-.02em}
+.top h1{font-size:30px;font-weight:700;letter-spacing:-.03em}
+.top p{font-size:13.5px}
+.card{background:var(--surface);border:1px solid #17171E;border-radius:var(--r);box-shadow:inset 0 1px 0 rgba(255,255,255,.04)}
+.card h3{font-weight:600;letter-spacing:-.01em}
+.kpi .val{font-weight:700}
+.kpi.hero{position:relative;overflow:hidden;background:linear-gradient(140deg,#3B86FF 0%,#1C55E6 45%,#0A2A8A 100%);border:0;box-shadow:0 18px 50px rgba(47,123,255,.35)}
+.kpi.hero::after{content:"";position:absolute;top:0;bottom:0;width:45%;left:-60%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.22),transparent);transform:skewX(-18deg);animation:shine 3.2s 1s ease-in-out infinite}
+@keyframes shine{0%{left:-60%}35%,100%{left:130%}}
+.kpi.hero .lbl,.kpi.hero .foot{color:#D6E4FF}
+.btn{background:var(--blue);background-image:none;border-radius:14px;box-shadow:0 8px 24px rgba(47,123,255,.4);transition:transform .12s,box-shadow .2s}
+.btn:active{transform:scale(.96);box-shadow:0 2px 8px rgba(47,123,255,.4)}
+.chip{background:var(--surface2);border-color:#24242D;transition:transform .12s,background .2s}
+.chip:active,.nav:active{transform:scale(.95)}
+.card.click,.kpi.click{transition:transform .15s}
+.card.click:active,.kpi.click:active{transform:scale(.98)}
+.side{background:rgba(0,0,0,.75);border-right-color:#15151B}
+.logo{background:conic-gradient(from 210deg,var(--blue),var(--cyan),var(--blue));box-shadow:0 0 0 3px #000 inset,0 8px 24px rgba(47,123,255,.5);color:#fff;font-family:var(--fd)}
+.nav.on{background:linear-gradient(90deg,rgba(47,123,255,.25),rgba(47,123,255,.04));border-color:rgba(47,123,255,.4)}
+.sync,.month{background:var(--surface);border-color:#1D1D25;border-radius:999px}
+.bar{background:#1A1A21}
+.bar i{background:linear-gradient(90deg,var(--blue),var(--cyan));transition:width .9s var(--spring)}
+/* Transiciones entre secciones */
+.view.on{animation:none}
+.view.fx-r{animation:vR .45s cubic-bezier(.2,.8,.2,1) both}
+.view.fx-l{animation:vL .45s cubic-bezier(.2,.8,.2,1) both}
+.view.fx-r .card,.view.fx-l .card,.view.fx-u .card{animation:rise .55s cubic-bezier(.2,.8,.2,1) both}
+.view.fx-u{animation:fadeIn .3s both}
+.view .card:nth-of-type(1){animation-delay:.03s}.view .card:nth-of-type(2){animation-delay:.08s}.view .card:nth-of-type(3){animation-delay:.13s}.view .card:nth-of-type(4){animation-delay:.18s}.view .card:nth-of-type(5){animation-delay:.23s}.view .card:nth-of-type(6){animation-delay:.28s}
+.grid>.card:nth-child(2){animation-delay:.1s}.grid>.card:nth-child(3){animation-delay:.16s}.grid>.card:nth-child(4){animation-delay:.22s}
+.view.fx-r .bar i,.view.fx-l .bar i,.view.fx-u .bar i{animation:growX 1s .2s cubic-bezier(.2,.8,.2,1) both;transform-origin:left}
+@keyframes vR{from{opacity:0;transform:translateX(28px)}to{opacity:1;transform:none}}
+@keyframes vL{from{opacity:0;transform:translateX(-28px)}to{opacity:1;transform:none}}
+@keyframes rise{from{opacity:0;transform:translateY(16px) scale(.985)}to{opacity:1;transform:none}}
+@keyframes fadeIn{from{opacity:0}}
+@keyframes growX{from{transform:scaleX(0)}}
+/* Ventanas: suben desde abajo con rebote */
+.modal{background:rgba(0,0,0,.62);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.modal.on{animation:fadeIn .25s both}
+.modal.on .sheet{animation:sheetUp .5s var(--spring) both}
+.sheet{background:#0E0E12;border-color:#22222B;border-radius:28px}
+@keyframes sheetUp{from{opacity:0;transform:translateY(60px) scale(.97)}to{opacity:1;transform:none}}
+.toast{background:#0E0E12;border:1px solid rgba(47,123,255,.6);border-radius:999px;box-shadow:0 10px 30px rgba(47,123,255,.25);transition:transform .45s var(--spring),opacity .3s}
+input,select,textarea{background:#101015!important;border-color:#24242D!important;color:var(--text)}
+input:focus,select:focus{border-color:var(--blue)!important;box-shadow:0 0 0 3px rgba(47,123,255,.2)}
+/* Dock flotante (móvil) */
+.dock{display:none}
+.msheet{display:none}
+@media (max-width:760px){
+ .mobnav,.fab{display:none!important}
+ main{padding:calc(14px + env(safe-area-inset-top,0px)) 14px 120px}
+ .top{margin-bottom:16px}
+ .top h1{font-size:27px}
+ .dock{display:flex;position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);width:min(calc(100% - 24px),430px);height:68px;padding:6px;border-radius:26px;align-items:center;justify-content:space-between;z-index:45;
+  background:rgba(14,14,18,.82);backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4);border:1px solid #25252E;box-shadow:0 18px 40px rgba(0,0,0,.7)}
+ .dock button{position:relative;z-index:1;flex:1;height:56px;border:0;background:none;color:var(--dim);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;font-size:10.5px;font-weight:700;transition:color .25s}
+ .dock button svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;transition:transform .35s var(--spring)}
+ .dock button.on{color:#fff}
+ .dock button.on svg{transform:translateY(-1px) scale(1.12)}
+ .dock .ind{position:absolute;z-index:0;top:6px;height:56px;border-radius:20px;background:linear-gradient(160deg,rgba(47,123,255,.35),rgba(47,123,255,.12));border:1px solid rgba(91,155,255,.35);transition:left .45s var(--spring),width .45s var(--spring)}
+ .dock .plus{flex:0 0 58px;height:58px;margin:0 4px;border-radius:20px;background:linear-gradient(140deg,#4A93FF,#1F5BEA);color:#fff;font-size:28px;font-weight:300;box-shadow:0 10px 26px rgba(47,123,255,.55);transition:transform .2s var(--spring)}
+ .dock .plus:active{transform:scale(.9) rotate(90deg)}
+ .msheet{display:flex;position:fixed;inset:0;z-index:60;background:rgba(0,0,0,.6);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);align-items:flex-end;opacity:0;pointer-events:none;transition:opacity .25s}
+ .msheet.on{opacity:1;pointer-events:auto}
+ .msheet .in{width:100%;background:#0E0E12;border-top:1px solid #23232C;border-radius:30px 30px 0 0;padding:14px 16px calc(22px + env(safe-area-inset-bottom,0px));transform:translateY(100%);transition:transform .5s var(--spring)}
+ .msheet.on .in{transform:none}
+ .msheet .grab{width:42px;height:5px;border-radius:3px;background:#2A2A33;margin:0 auto 14px}
+ .msheet h3{font-size:16px;margin:0 4px 12px;color:var(--muted);font-weight:600}
+ .msheet .tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+ .msheet .tiles button{background:#15151B;border:1px solid #23232C;border-radius:22px;padding:16px;text-align:left;color:var(--text);display:flex;flex-direction:column;gap:6px;opacity:0;transform:translateY(14px);transition:transform .45s var(--spring),opacity .3s,background .2s}
+ .msheet.on .tiles button{opacity:1;transform:none}
+ .msheet.on .tiles button:nth-child(2){transition-delay:.04s}.msheet.on .tiles button:nth-child(3){transition-delay:.08s}.msheet.on .tiles button:nth-child(4){transition-delay:.12s}
+ .msheet .tiles button.on{border-color:rgba(91,155,255,.6);background:linear-gradient(160deg,rgba(47,123,255,.22),#15151B)}
+ .msheet .tiles .e{font-size:24px}.msheet .tiles b{font-family:var(--fd);font-size:15px}.msheet .tiles small{color:var(--muted);font-size:11.5px;line-height:1.3}
+ .modal{place-items:end center;padding:0}
+ .modal .sheet{border-radius:30px 30px 0 0;max-width:none;padding-bottom:calc(22px + env(safe-area-inset-bottom,0px))}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+</style>
+<nav class="dock" id="dock" aria-label="Secciones">
+ <i class="ind" id="dInd"></i>
+ <button data-d="resumen"><svg viewBox="0 0 24 24"><path d="M4 11.5 12 5l8 6.5V20H4z"/><path d="M10 20v-5h4v5"/></svg><span>Inicio</span></button>
+ <button data-d="gastos"><svg viewBox="0 0 24 24"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6"/></svg><span>Gastos</span></button>
+ <button class="plus" id="dPlus" aria-label="Agregar">＋</button>
+ <button data-d="meta"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r=".8"/></svg><span>Meta</span></button>
+ <button data-d="mas" id="dMore"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="6.5" height="6.5" rx="2"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="2"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="2"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="2"/></svg><span>Más</span></button>
+</nav>
+<div class="msheet" id="mMore"><div class="in"><div class="grab"></div><h3>Más secciones</h3><div class="tiles">
+ <button data-g="historial"><span class="e">📊</span><b>Mes a mes</b><small>Cómo vas mejorando</small></button>
+ <button data-g="compartidos"><span class="e">👥</span><b>Familia</b><small>Fondos compartidos</small></button>
+ <button data-g="tarjeta"><span class="e">💳</span><b>Tarjeta</b><small>Tu plan para salir de la deuda</small></button>
+ <button data-g="patrimonio"><span class="e">🏛️</span><b>Patrimonio</b><small>Lo que tienes menos lo que debes</small></button>
+</div></div></div>
+<script>
+/* Capa v4: dock, transiciones entre secciones y cifras que cuentan hacia su valor. */
+(function(){
+ const ORDER=['resumen','gastos','historial','compartidos','tarjeta','meta','patrimonio'],MORE=['historial','compartidos','tarjeta','patrimonio'];
+ const q=s=>document.querySelector(s),qa=s=>[...document.querySelectorAll(s)];
+ if(window.Chart){Chart.defaults.color='#8E95A8';Chart.defaults.font.family="'Manrope',sans-serif";Chart.defaults.borderColor='rgba(255,255,255,.06)';Chart.defaults.animation={duration:900,easing:'easeOutQuart'}}
+ const ease=t=>1-Math.pow(1-t,3);
+ function countUp(root){if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  root.querySelectorAll('.num').forEach(el=>{if(el.childElementCount)return;const t=el.textContent.trim();const m=t.match(/^(-?)([^\d-]*?)([\d,]+(?:\.\d+)?)(.*)$/);if(!m||t.length>22)return;
+   const dec=(m[3].split('.')[1]||'').length,to=parseFloat(m[3].replace(/,/g,''))*(m[1]?-1:1),from=el._v==null?0:el._v;el._v=to;if(from===to)return;
+   const pre=m[2],suf=m[4],t0=performance.now(),dur=750;cancelAnimationFrame(el._raf);
+   const step=now=>{const k=Math.min(1,(now-t0)/dur),v=from+(to-from)*ease(k);el.textContent=(v<0?'-':'')+pre+Math.abs(v).toLocaleString('en-US',{minimumFractionDigits:dec,maximumFractionDigits:dec})+suf;if(k<1)el._raf=requestAnimationFrame(step);else el.textContent=t};
+   el._raf=requestAnimationFrame(step)})}
+ function dockSync(v){const inMore=MORE.includes(v);qa('.dock [data-d]').forEach(b=>b.classList.toggle('on',b.dataset.d===v||(inMore&&b.dataset.d==='mas')));
+  const on=q('.dock button.on'),ind=q('#dInd');if(on&&ind){ind.style.left=on.offsetLeft+'px';ind.style.width=on.offsetWidth+'px'}
+  qa('#mMore [data-g]').forEach(b=>b.classList.toggle('on',b.dataset.g===v))}
+ const _go=window.go,_render=window.render;let last=null;
+ window.render=function(){_render.apply(this,arguments);const v=q('.view.on');if(v)countUp(v)};
+ window.go=function(v){const prev=(typeof S!=='undefined'&&S.view)||last;_go(v);const cur=S.view,sec=q('#v-'+cur);
+  if(sec&&prev!==cur){sec.classList.remove('fx-r','fx-l','fx-u');void sec.offsetWidth;sec.classList.add(prev==null?'fx-u':ORDER.indexOf(cur)>ORDER.indexOf(prev)?'fx-r':'fx-l')}
+  last=cur;dockSync(cur)};
+ qa('.dock [data-d]').forEach(b=>b.onclick=()=>{if(b.dataset.d==='mas'){q('#mMore').classList.add('on');return}go(b.dataset.d)});
+ q('#dPlus').onclick=()=>q('#fab').click();
+ q('#mMore').onclick=e=>{const b=e.target.closest('[data-g]');if(b){q('#mMore').classList.remove('on');setTimeout(()=>go(b.dataset.g),120);return}if(e.target.id==='mMore')q('#mMore').classList.remove('on')};
+ addEventListener('resize',()=>dockSync(S.view));
+ /* primera pintura */
+ const start=()=>{try{go(S.view||'resumen')}catch(e){}};
+ if(document.readyState==='complete')setTimeout(start,30);else addEventListener('load',()=>setTimeout(start,30));
+})();
+</script>
+
 </body>
 </html>
