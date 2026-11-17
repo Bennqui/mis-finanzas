@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <title>Mis Finanzas</title>
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -1417,6 +1417,11 @@ input:focus,select:focus{border-color:var(--blue)!important;box-shadow:0 0 0 3px
 
 <!-- ===== Capa v5: Dólar BCV, calculadora del carro, bolsillos, escenarios, modo privado, racha, reto, fijos, alertas y tu mes en historia ===== -->
 <style id="v5">
+/* El iPhone hace zoom al tocar un campo con letra menor de 16px: todos los campos usan 16px o más. */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}html,body{overflow-x:hidden}
+input,select,textarea,.field{font-size:16px!important}
+.conv .inp input{font-size:30px!important}
+
 .x5row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
 .x5chip{display:inline-flex;align-items:center;gap:7px;padding:9px 13px;border-radius:999px;background:var(--surface);border:1px solid #1D1D25;font-weight:700;font-size:12.5px;color:var(--text);transition:transform .15s}
 .x5chip:active{transform:scale(.95)}
