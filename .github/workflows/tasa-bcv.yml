@@ -2,8 +2,10 @@ name: Tasa BCV
 # Lee la tasa oficial del Banco Central de Venezuela y la guarda en tasa.json para la app.
 on:
   schedule:
-    - cron: '7 11,15,19,21,23 * * 1-5'   # días hábiles: 7:07, 11:07, 15:07, 17:07 y 19:07 hora de Venezuela
-    - cron: '17 13 * * 0,6'              # fines de semana, una vez
+    # GitHub a veces se salta corridas programadas, así que revisamos cada hora (solo guarda si la tasa cambió)
+    - cron: '23 11-23 * * 1-5'           # días hábiles: cada hora de 7:23 a 19:23 hora de Venezuela
+    - cron: '23 0-3 * * 2-6'             # y de 20:23 a 23:23 (el BCV suele publicar la del día siguiente en la tarde)
+    - cron: '43 13,19,23 * * 0,6'        # fines de semana, tres veces
   workflow_dispatch: {}
   push:
     branches: [main]

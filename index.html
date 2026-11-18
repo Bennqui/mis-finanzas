@@ -1564,13 +1564,27 @@ body.priv .view .num,body.priv .view .val,body.priv .view .big,body.priv .story 
  /* ---------- Dólar BCV ---------- */
  let B=null;try{B=JSON.parse(localStorage.getItem('mf-bcv')||'null')}catch(e){}
  const rate=()=>{const m=pnum(q('#bcvMan').value);return m>0?m:(B&&B.usd)||0};
- async function loadBcv(){try{const r=await fetch('tasa.json',{cache:'no-store'});if(r.ok){const j=await r.json();if(j&&j.usd){B=j;localStorage.setItem('mf-bcv',JSON.stringify(j))}}}catch(e){}paintBcv()}
+ let bcvCheck=+localStorage.getItem('mf-bcv-chk')||0;
+ const hoyVE=()=>new Date().toLocaleDateString('en-CA',{timeZone:'America/Caracas'});
+ const saveB=j=>{B=j;try{localStorage.setItem('mf-bcv',JSON.stringify(j))}catch(e){}};
+ async function loadBcv(){let ok=false;
+  try{const r=await fetch('tasa.json?t='+Date.now(),{cache:'no-store'});if(r.ok){const j=await r.json();if(j&&j.usd){ok=true;
+    /* nunca reemplazar una tasa más nueva (p. ej. la del respaldo) por una más vieja */
+    if(!B||!B.fecha_valor||!j.fecha_valor||j.fecha_valor>=B.fecha_valor)saveB(j)}}}catch(e){}
+  /* respaldo: si GitHub no ha traído la tasa de hoy, se consulta directo desde el teléfono */
+  if(!B||!B.fecha_valor||B.fecha_valor<hoyVE()){try{const r=await fetch('https://ve.dolarapi.com/v1/dolares/oficial',{cache:'no-store'});
+    if(r.ok){const j=await r.json(),u=+j.promedio,f=String(j.fechaActualizacion||'').slice(0,10);
+      if(u>0&&f&&(!B||!B.fecha_valor||f>B.fecha_valor)){const h=((B&&B.historial)||[]).filter(x=>x.fecha!==f).concat([{fecha:f,usd:u}]).slice(-60);
+        saveB({...(B||{}),usd:u,fecha_valor:f,fecha_texto:null,actualizado:j.fechaActualizacion||new Date().toISOString(),fuente:'BCV vía respaldo (dolarapi)',historial:h});ok=true}}}catch(e){}}
+  if(ok){bcvCheck=Date.now();try{localStorage.setItem('mf-bcv-chk',bcvCheck)}catch(e){}}
+  paintBcv()}
  function paintBcv(){const r=rate(),man=pnum(q('#bcvMan').value)>0;
   const txt=B?`Fecha valor: ${fdate(B.fecha_valor)||B.fecha_texto||'—'}`:'Aún no se ha descargado la tasa';
   q('#bcvMiniV').textContent=r?'Bs '+bs(r):'—';q('#bcvMiniF').textContent=man?'Con tu tasa manual':txt;
   if(S.view!=='bcv')return;
   q('#bcvRate').textContent=r?'Bs '+bs(r):'—';
-  q('#bcvF').innerHTML=man?'Usando tu tasa manual':B?`${txt} · actualizado ${new Date(B.actualizado).toLocaleString('es-VE',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})}`:'Sin conexión todavía: escribe una tasa abajo';
+  const fh=t=>new Date(t).toLocaleString('es-VE',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});
+  q('#bcvF').innerHTML=man?'Usando tu tasa manual':B?`${txt} · publicada ${fh(B.actualizado)}`+(bcvCheck?`<br>Revisada ${fh(bcvCheck)}${Date.now()-bcvCheck>6*3600e3?' · <b class="warn">sin conexión reciente</b>':' ✓'}`:''):'Sin conexión todavía: escribe una tasa abajo';
   q('#cvEur').innerHTML=B&&B.eur&&!man?`Euro oficial: <b>Bs ${bs(B.eur)}</b>`:'';
   q('#cvQ').innerHTML=[1,5,10,20,50,100].map(v=>`<button class="chip" data-q="${v}">$${v}</button>`).join('');
   qa('#cvQ [data-q]').forEach(b=>b.onclick=()=>{q('#cvUsd').value=b.dataset.q;conv('u')});
