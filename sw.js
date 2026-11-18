@@ -1,6 +1,6 @@
 /* Mis Finanzas: funciona sin conexión. La app se guarda en el teléfono y se actualiza sola cuando hay internet.
    Tus datos NO pasan por aquí: viven en el almacenamiento del teléfono. */
-const V='mf-v8';
+const V='mf-v9';
 const BASE=['./','index.html','manifest.webmanifest','icon-180.png','icon-192.png','icon-512.png'];
 const CDN=['https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(V).then(c=>c.addAll(BASE).then(()=>Promise.all(CDN.map(u=>fetch(u,{mode:'no-cors'}).then(r=>c.put(u,r)).catch(()=>{}))))).then(()=>self.skipWaiting()))});
@@ -8,11 +8,14 @@ self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(k=>Promise.a
 self.addEventListener('fetch',e=>{
   const r=e.request;if(r.method!=='GET')return;
   const u=new URL(r.url);
-  if(u.origin===location.origin&&u.pathname.endsWith('/tasa.json')){ /* la tasa del BCV: siempre primero internet */
-    e.respondWith(fetch(r).then(res=>{const cp=res.clone();caches.open(V).then(c=>c.put('tasa.json',cp));return res}).catch(()=>caches.match('tasa.json')));return;
+  if(u.origin===location.origin&&u.pathname.endsWith('/tasa.json')){ /* la tasa del BCV: siempre primero internet; nunca se guarda un error */
+    e.respondWith(fetch(r).then(res=>{if(res.ok){const cp=res.clone();caches.open(V).then(c=>c.put('tasa.json',cp));return res}return caches.match('tasa.json').then(m=>m||res)}).catch(()=>caches.match('tasa.json').then(m=>m||new Response('{}',{status:504}))));return;
   }
-  if(r.mode==='navigate'){
-    e.respondWith(fetch(r).then(res=>{const cp=res.clone();caches.open(V).then(c=>c.put('index.html',cp));return res}).catch(()=>caches.match('index.html')));
+  if(r.mode==='navigate'){ /* la app: primero internet; sin señal o si tarda más de 5 s, la guardada */
+    e.respondWith(new Promise(ok=>{let listo=false;const da=x=>{if(!listo){listo=true;ok(x)}};const g=()=>caches.match('index.html');
+      const t=setTimeout(()=>g().then(m=>{if(m)da(m)}),5000);
+      fetch(r).then(res=>{clearTimeout(t);if(res.ok){const cp=res.clone();caches.open(V).then(c=>c.put('index.html',cp));da(res)}else g().then(m=>da(m||res))})
+        .catch(()=>{clearTimeout(t);g().then(m=>da(m||new Response('Sin conexión',{status:504})))})}));
     return;
   }
   if(u.origin===location.origin||/fonts\.(googleapis|gstatic)\.com$|cdnjs\.cloudflare\.com$/.test(u.hostname)){

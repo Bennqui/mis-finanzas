@@ -20,6 +20,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Descargar la página del BCV
+        id: bcv
+        continue-on-error: true
         run: |
           URL=https://www.bcv.org.ve/
           ok=0
@@ -38,10 +40,30 @@ jobs:
           done
           [ "$ok" = 1 ] || { echo "No pude descargar bcv.org.ve"; exit 1; }
       - name: Leer la tasa
+        id: leer
+        if: steps.bcv.outcome == 'success'
+        continue-on-error: true
         run: python3 tareas/tasa_bcv.py bcv.html
+      - name: Respaldo si la página del BCV falló (dolarapi replica la tasa oficial)
+        if: steps.bcv.outcome != 'success' || steps.leer.outcome != 'success'
+        run: |
+          curl -fsSL --max-time 30 https://ve.dolarapi.com/v1/dolares/oficial -o api.json
+          python3 - <<'PY'
+          import json, datetime
+          a = json.load(open('api.json')); usd = float(a.get('promedio') or 0); f = str(a.get('fechaActualizacion') or '')[:10]
+          if usd <= 0 or len(f) != 10: raise SystemExit('ERROR: el respaldo no trajo una tasa válida')
+          try: old = json.load(open('tasa.json'))
+          except Exception: old = {}
+          if old.get('fecha_valor') and f < old['fecha_valor']: raise SystemExit(0)   # nunca retroceder a una tasa más vieja
+          if old.get('usd') == usd and old.get('fecha_valor') == f: raise SystemExit(0)
+          h = [x for x in old.get('historial', []) if x.get('fecha') != f] + [{'fecha': f, 'usd': usd}]
+          out = dict(old, usd=usd, fecha_valor=f, fecha_texto=None, fuente='BCV vía respaldo (dolarapi)',
+                     actualizado=datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'), historial=h[-60:])
+          json.dump(out, open('tasa.json', 'w'), ensure_ascii=False, indent=1); print('Respaldo OK', usd, f)
+          PY
       - name: Guardar
         run: |
-          rm -f bcv.html leaf.pem inter.bin inter.pem bundle.pem
+          rm -f bcv.html leaf.pem inter.bin inter.pem bundle.pem api.json
           if git diff --quiet -- tasa.json 2>/dev/null && git ls-files --error-unmatch tasa.json >/dev/null 2>&1; then echo "Sin cambios"; exit 0; fi
           git config user.name "Tasa BCV"; git config user.email "actions@users.noreply.github.com"
           git add tasa.json && git commit -m "Tasa BCV $(python3 -c "import json;d=json.load(open('tasa.json'));print(d['usd'],d['fecha_valor'])")" && git push
