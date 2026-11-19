@@ -8,13 +8,12 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Mis Finanzas">
-<meta name="theme-color" content="#000000">
+<meta name="theme-color" content="#0E0F12">
 <meta name="robots" content="noindex">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icon-180.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<link href="assets/fuentes.css" rel="stylesheet">
+<script src="assets/chart.umd.min.js"></script>
 <style>
 :root{
   --bg:#060b17; --surface:#0c1529; --surface2:#111d36; --surface3:#172646;
@@ -295,7 +294,213 @@ input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;bac
 @media (max-width:760px){.qa{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
 </style>
 </head>
-<body>
+<body><svg xmlns="http://www.w3.org/2000/svg" style="display:none"><symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14" />
+  <path d="m12 5 7 7-7 7" /></symbol><symbol id="i-baby" viewBox="0 0 24 24"><path d="M9 12h.01" />
+  <path d="M15 12h.01" />
+  <path d="M10 16c.5.3 1.2.5 2 .5s1.5-.2 2-.5" />
+  <path d="M19 6.3a9 9 0 0 1 1.8 3.9 2 2 0 0 1 0 3.6 9 9 0 0 1-17.6 0 2 2 0 0 1 0-3.6A9 9 0 0 1 12 3c2 0 3.5 1.1 3.5 2.5s-.9 2.5-2 2.5c-.8 0-1.5-.4-1.5-1" /></symbol><symbol id="i-badge-dollar-sign" viewBox="0 0 24 24"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" />
+  <path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8" />
+  <path d="M12 18V6" /></symbol><symbol id="i-banknote" viewBox="0 0 24 24"><rect width="20" height="12" x="2" y="6" rx="2" />
+  <circle cx="12" cy="12" r="2" />
+  <path d="M6 12h.01M18 12h.01" /></symbol><symbol id="i-bell" viewBox="0 0 24 24"><path d="M10.268 21a2 2 0 0 0 3.464 0" />
+  <path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326" /></symbol><symbol id="i-briefcase" viewBox="0 0 24 24"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+  <rect width="20" height="14" x="2" y="6" rx="2" /></symbol><symbol id="i-building-2" viewBox="0 0 24 24"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z" />
+  <path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2" />
+  <path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2" />
+  <path d="M10 6h4" />
+  <path d="M10 10h4" />
+  <path d="M10 14h4" />
+  <path d="M10 18h4" /></symbol><symbol id="i-bus" viewBox="0 0 24 24"><path d="M8 6v6" />
+  <path d="M15 6v6" />
+  <path d="M2 12h19.6" />
+  <path d="M18 18h3s.5-1.7.8-2.8c.1-.4.2-.8.2-1.2 0-.4-.1-.8-.2-1.2l-1.4-5C20.1 6.8 19.1 6 18 6H4a2 2 0 0 0-2 2v10h3" />
+  <circle cx="7" cy="18" r="2" />
+  <path d="M9 18h5" />
+  <circle cx="16" cy="18" r="2" /></symbol><symbol id="i-calculator" viewBox="0 0 24 24"><rect width="16" height="20" x="4" y="2" rx="2" />
+  <line x1="8" x2="16" y1="6" y2="6" />
+  <line x1="16" x2="16" y1="14" y2="18" />
+  <path d="M16 10h.01" />
+  <path d="M12 10h.01" />
+  <path d="M8 10h.01" />
+  <path d="M12 14h.01" />
+  <path d="M8 14h.01" />
+  <path d="M12 18h.01" />
+  <path d="M8 18h.01" /></symbol><symbol id="i-calendar" viewBox="0 0 24 24"><path d="M8 2v4" />
+  <path d="M16 2v4" />
+  <rect width="18" height="18" x="3" y="4" rx="2" />
+  <path d="M3 10h18" /></symbol><symbol id="i-car" viewBox="0 0 24 24"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2" />
+  <circle cx="7" cy="17" r="2" />
+  <path d="M9 17h6" />
+  <circle cx="17" cy="17" r="2" /></symbol><symbol id="i-chart-column" viewBox="0 0 24 24"><path d="M3 3v16a2 2 0 0 0 2 2h16" />
+  <path d="M18 17V9" />
+  <path d="M13 17V5" />
+  <path d="M8 17v-3" /></symbol><symbol id="i-chart-line" viewBox="0 0 24 24"><path d="M3 3v16a2 2 0 0 0 2 2h16" />
+  <path d="m19 9-5 5-4-4-3 3" /></symbol><symbol id="i-chart-pie" viewBox="0 0 24 24"><path d="M21 12c.552 0 1.005-.449.95-.998a10 10 0 0 0-8.953-8.951c-.55-.055-.998.398-.998.95v8a1 1 0 0 0 1 1z" />
+  <path d="M21.21 15.89A10 10 0 1 1 8 2.83" /></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5" /></symbol><symbol id="i-chevron-left" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6" /></symbol><symbol id="i-chevron-right" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6" /></symbol><symbol id="i-circle-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" />
+  <line x1="12" x2="12" y1="8" y2="12" />
+  <line x1="12" x2="12.01" y1="16" y2="16" /></symbol><symbol id="i-circle-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" />
+  <path d="m9 12 2 2 4-4" /></symbol><symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" />
+  <polyline points="12 6 12 12 16 14" /></symbol><symbol id="i-cloud" viewBox="0 0 24 24"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z" /></symbol><symbol id="i-coins" viewBox="0 0 24 24"><circle cx="8" cy="8" r="6" />
+  <path d="M18.09 10.37A6 6 0 1 1 10.34 18" />
+  <path d="M7 6h1v4" />
+  <path d="m16.71 13.88.7.71-2.82 2.82" /></symbol><symbol id="i-credit-card" viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="5" rx="2" />
+  <line x1="2" x2="22" y1="10" y2="10" /></symbol><symbol id="i-dog" viewBox="0 0 24 24"><path d="M11.25 16.25h1.5L12 17z" />
+  <path d="M16 14v.5" />
+  <path d="M4.42 11.247A13.152 13.152 0 0 0 4 14.556C4 18.728 7.582 21 12 21s8-2.272 8-6.444a11.702 11.702 0 0 0-.493-3.309" />
+  <path d="M8 14v.5" />
+  <path d="M8.5 8.5c-.384 1.05-1.083 2.028-2.344 2.5-1.931.722-3.576-.297-3.656-1-.113-.994 1.177-6.53 4-7 1.923-.321 3.651.845 3.651 2.235A7.497 7.497 0 0 1 14 5.277c0-1.39 1.844-2.598 3.767-2.277 2.823.47 4.113 6.006 4 7-.08.703-1.725 1.722-3.656 1-1.261-.472-1.855-1.45-2.239-2.5" /></symbol><symbol id="i-dollar-sign" viewBox="0 0 24 24"><line x1="12" x2="12" y1="2" y2="22" />
+  <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" /></symbol><symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+  <polyline points="7 10 12 15 17 10" />
+  <line x1="12" x2="12" y1="15" y2="3" /></symbol><symbol id="i-droplet" viewBox="0 0 24 24"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z" /></symbol><symbol id="i-dumbbell" viewBox="0 0 24 24"><path d="M14.4 14.4 9.6 9.6" />
+  <path d="M18.657 21.485a2 2 0 1 1-2.829-2.828l-1.767 1.768a2 2 0 1 1-2.829-2.829l6.364-6.364a2 2 0 1 1 2.829 2.829l-1.768 1.767a2 2 0 1 1 2.828 2.829z" />
+  <path d="m21.5 21.5-1.4-1.4" />
+  <path d="M3.9 3.9 2.5 2.5" />
+  <path d="M6.404 12.768a2 2 0 1 1-2.829-2.829l1.768-1.767a2 2 0 1 1-2.828-2.829l2.828-2.828a2 2 0 1 1 2.829 2.828l1.767-1.768a2 2 0 1 1 2.829 2.829z" /></symbol><symbol id="i-equal" viewBox="0 0 24 24"><line x1="5" x2="19" y1="9" y2="9" />
+  <line x1="5" x2="19" y1="15" y2="15" /></symbol><symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0" />
+  <circle cx="12" cy="12" r="3" /></symbol><symbol id="i-eye-off" viewBox="0 0 24 24"><path d="M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49" />
+  <path d="M14.084 14.158a3 3 0 0 1-4.242-4.242" />
+  <path d="M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151 1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.446-5.143" />
+  <path d="m2 2 20 20" /></symbol><symbol id="i-file-text" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
+  <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+  <path d="M10 9H8" />
+  <path d="M16 13H8" />
+  <path d="M16 17H8" /></symbol><symbol id="i-film" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2" />
+  <path d="M7 3v18" />
+  <path d="M3 7.5h4" />
+  <path d="M3 12h18" />
+  <path d="M3 16.5h4" />
+  <path d="M17 3v18" />
+  <path d="M17 7.5h4" />
+  <path d="M17 16.5h4" /></symbol><symbol id="i-filter" viewBox="0 0 24 24"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" /></symbol><symbol id="i-flame" viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z" /></symbol><symbol id="i-fuel" viewBox="0 0 24 24"><line x1="3" x2="15" y1="22" y2="22" />
+  <line x1="4" x2="14" y1="9" y2="9" />
+  <path d="M14 22V4a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v18" />
+  <path d="M14 13h2a2 2 0 0 1 2 2v2a2 2 0 0 0 2 2a2 2 0 0 0 2-2V9.83a2 2 0 0 0-.59-1.42L18 5" /></symbol><symbol id="i-gift" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="4" rx="1" />
+  <path d="M12 8v13" />
+  <path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7" />
+  <path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5" /></symbol><symbol id="i-graduation-cap" viewBox="0 0 24 24"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z" />
+  <path d="M22 10v6" />
+  <path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5" /></symbol><symbol id="i-hand-coins" viewBox="0 0 24 24"><path d="M11 15h2a2 2 0 1 0 0-4h-3c-.6 0-1.1.2-1.4.6L3 17" />
+  <path d="m7 21 1.6-1.4c.3-.4.8-.6 1.4-.6h4c1.1 0 2.1-.4 2.8-1.2l4.6-4.4a2 2 0 0 0-2.75-2.91l-4.2 3.9" />
+  <path d="m2 16 6 6" />
+  <circle cx="16" cy="9" r="2.9" />
+  <circle cx="6" cy="5" r="3" /></symbol><symbol id="i-handshake" viewBox="0 0 24 24"><path d="m11 17 2 2a1 1 0 1 0 3-3" />
+  <path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4" />
+  <path d="m21 3 1 11h-2" />
+  <path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3" />
+  <path d="M3 4h8" /></symbol><symbol id="i-heart-pulse" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
+  <path d="M3.22 12H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27" /></symbol><symbol id="i-hourglass" viewBox="0 0 24 24"><path d="M5 22h14" />
+  <path d="M5 2h14" />
+  <path d="M17 22v-4.172a2 2 0 0 0-.586-1.414L12 12l-4.414 4.414A2 2 0 0 0 7 17.828V22" />
+  <path d="M7 2v4.172a2 2 0 0 0 .586 1.414L12 12l4.414-4.414A2 2 0 0 0 17 6.172V2" /></symbol><symbol id="i-house" viewBox="0 0 24 24"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" />
+  <path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /></symbol><symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" />
+  <path d="M12 16v-4" />
+  <path d="M12 8h.01" /></symbol><symbol id="i-landmark" viewBox="0 0 24 24"><line x1="3" x2="21" y1="22" y2="22" />
+  <line x1="6" x2="6" y1="18" y2="11" />
+  <line x1="10" x2="10" y1="18" y2="11" />
+  <line x1="14" x2="14" y1="18" y2="11" />
+  <line x1="18" x2="18" y1="18" y2="11" />
+  <polygon points="12 2 20 7 4 7" /></symbol><symbol id="i-layout-grid" viewBox="0 0 24 24"><rect width="7" height="7" x="3" y="3" rx="1" />
+  <rect width="7" height="7" x="14" y="3" rx="1" />
+  <rect width="7" height="7" x="14" y="14" rx="1" />
+  <rect width="7" height="7" x="3" y="14" rx="1" /></symbol><symbol id="i-life-buoy" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" />
+  <path d="m4.93 4.93 4.24 4.24" />
+  <path d="m14.83 9.17 4.24-4.24" />
+  <path d="m14.83 14.83 4.24 4.24" />
+  <path d="m9.17 14.83-4.24 4.24" />
+  <circle cx="12" cy="12" r="4" /></symbol><symbol id="i-list" viewBox="0 0 24 24"><path d="M3 12h.01" />
+  <path d="M3 18h.01" />
+  <path d="M3 6h.01" />
+  <path d="M8 12h13" />
+  <path d="M8 18h13" />
+  <path d="M8 6h13" /></symbol><symbol id="i-lock" viewBox="0 0 24 24"><rect width="18" height="11" x="3" y="11" rx="2" ry="2" />
+  <path d="M7 11V7a5 5 0 0 1 10 0v4" /></symbol><symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14" /></symbol><symbol id="i-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" /></symbol><symbol id="i-party-popper" viewBox="0 0 24 24"><path d="M5.8 11.3 2 22l10.7-3.79" />
+  <path d="M4 3h.01" />
+  <path d="M22 8h.01" />
+  <path d="M15 2h.01" />
+  <path d="M22 20h.01" />
+  <path d="m22 2-2.24.75a2.9 2.9 0 0 0-1.96 3.12c.1.86-.57 1.63-1.45 1.63h-.38c-.86 0-1.6.6-1.76 1.44L14 10" />
+  <path d="m22 13-.82-.33c-.86-.34-1.82.2-1.98 1.11c-.11.7-.72 1.22-1.43 1.22H17" />
+  <path d="m11 2 .33.82c.34.86-.2 1.82-1.11 1.98C9.52 4.9 9 5.52 9 6.23V7" />
+  <path d="M11 13c1.93 1.93 2.83 4.17 2 5-.83.83-3.07-.07-5-2-1.93-1.93-2.83-4.17-2-5 .83-.83 3.07.07 5 2Z" /></symbol><symbol id="i-pause" viewBox="0 0 24 24"><rect x="14" y="4" width="4" height="16" rx="1" />
+  <rect x="6" y="4" width="4" height="16" rx="1" /></symbol><symbol id="i-pencil" viewBox="0 0 24 24"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" />
+  <path d="m15 5 4 4" /></symbol><symbol id="i-percent" viewBox="0 0 24 24"><line x1="19" x2="5" y1="5" y2="19" />
+  <circle cx="6.5" cy="6.5" r="2.5" />
+  <circle cx="17.5" cy="17.5" r="2.5" /></symbol><symbol id="i-piggy-bank" viewBox="0 0 24 24"><path d="M19 5c-1.5 0-2.8 1.4-3 2-3.5-1.5-11-.3-11 5 0 1.8 0 3 2 4.5V20h4v-2h3v2h4v-4c1-.5 1.7-1 2-2h2v-4h-2c0-1-.5-1.5-1-2V5z" />
+  <path d="M2 9v1c0 1.1.9 2 2 2h1" />
+  <path d="M16 11h.01" /></symbol><symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 17v5" />
+  <path d="M9 10.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24V16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V7a1 1 0 0 1 1-1 2 2 0 0 0 0-4H8a2 2 0 0 0 0 4 1 1 0 0 1 1 1z" /></symbol><symbol id="i-plane" viewBox="0 0 24 24"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z" /></symbol><symbol id="i-play" viewBox="0 0 24 24"><polygon points="6 3 20 12 6 21 6 3" /></symbol><symbol id="i-plus" viewBox="0 0 24 24"><path d="M5 12h14" />
+  <path d="M12 5v14" /></symbol><symbol id="i-receipt" viewBox="0 0 24 24"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z" />
+  <path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8" />
+  <path d="M12 17.5v-11" /></symbol><symbol id="i-refresh-cw" viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8" />
+  <path d="M21 3v5h-5" />
+  <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16" />
+  <path d="M8 16H3v5" /></symbol><symbol id="i-ruler" viewBox="0 0 24 24"><path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.41 2.41 0 0 1 0-3.4l2.6-2.6a2.41 2.41 0 0 1 3.4 0Z" />
+  <path d="m14.5 12.5 2-2" />
+  <path d="m11.5 9.5 2-2" />
+  <path d="m8.5 6.5 2-2" />
+  <path d="m17.5 15.5 2-2" /></symbol><symbol id="i-save" viewBox="0 0 24 24"><path d="M15.2 3a2 2 0 0 1 1.4.6l3.8 3.8a2 2 0 0 1 .6 1.4V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z" />
+  <path d="M17 21v-7a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v7" />
+  <path d="M7 3v4a1 1 0 0 0 1 1h7" /></symbol><symbol id="i-scale" viewBox="0 0 24 24"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z" />
+  <path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z" />
+  <path d="M7 21h10" />
+  <path d="M12 3v18" />
+  <path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2" /></symbol><symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8" />
+  <path d="m21 21-4.3-4.3" /></symbol><symbol id="i-settings" viewBox="0 0 24 24"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z" />
+  <circle cx="12" cy="12" r="3" /></symbol><symbol id="i-share-2" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3" />
+  <circle cx="6" cy="12" r="3" />
+  <circle cx="18" cy="19" r="3" />
+  <line x1="8.59" x2="15.42" y1="13.51" y2="17.49" />
+  <line x1="15.41" x2="8.59" y1="6.51" y2="10.49" /></symbol><symbol id="i-shield-check" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
+  <path d="m9 12 2 2 4-4" /></symbol><symbol id="i-shirt" viewBox="0 0 24 24"><path d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z" /></symbol><symbol id="i-shopping-cart" viewBox="0 0 24 24"><circle cx="8" cy="21" r="1" />
+  <circle cx="19" cy="21" r="1" />
+  <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" /></symbol><symbol id="i-sliders-horizontal" viewBox="0 0 24 24"><line x1="21" x2="14" y1="4" y2="4" />
+  <line x1="10" x2="3" y1="4" y2="4" />
+  <line x1="21" x2="12" y1="12" y2="12" />
+  <line x1="8" x2="3" y1="12" y2="12" />
+  <line x1="21" x2="16" y1="20" y2="20" />
+  <line x1="12" x2="3" y1="20" y2="20" />
+  <line x1="14" x2="14" y1="2" y2="6" />
+  <line x1="8" x2="8" y1="10" y2="14" />
+  <line x1="16" x2="16" y1="18" y2="22" /></symbol><symbol id="i-smartphone" viewBox="0 0 24 24"><rect width="14" height="20" x="5" y="2" rx="2" ry="2" />
+  <path d="M12 18h.01" /></symbol><symbol id="i-sparkles" viewBox="0 0 24 24"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z" />
+  <path d="M20 3v4" />
+  <path d="M22 5h-4" />
+  <path d="M4 17v2" />
+  <path d="M5 18H3" /></symbol><symbol id="i-store" viewBox="0 0 24 24"><path d="m2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7" />
+  <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8" />
+  <path d="M15 22v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4" />
+  <path d="M2 7h20" />
+  <path d="M22 7v3a2 2 0 0 1-2 2a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 16 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 12 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 8 12a2.7 2.7 0 0 1-1.59-.63.7.7 0 0 0-.82 0A2.7 2.7 0 0 1 4 12a2 2 0 0 1-2-2V7" /></symbol><symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" />
+  <path d="M12 2v2" />
+  <path d="M12 20v2" />
+  <path d="m4.93 4.93 1.41 1.41" />
+  <path d="m17.66 17.66 1.41 1.41" />
+  <path d="M2 12h2" />
+  <path d="M20 12h2" />
+  <path d="m6.34 17.66-1.41 1.41" />
+  <path d="m19.07 4.93-1.41 1.41" /></symbol><symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" />
+  <circle cx="12" cy="12" r="6" />
+  <circle cx="12" cy="12" r="2" /></symbol><symbol id="i-trash-2" viewBox="0 0 24 24"><path d="M3 6h18" />
+  <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" />
+  <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+  <line x1="10" x2="10" y1="11" y2="17" />
+  <line x1="14" x2="14" y1="11" y2="17" /></symbol><symbol id="i-trending-down" viewBox="0 0 24 24"><polyline points="22 17 13.5 8.5 8.5 13.5 2 7" />
+  <polyline points="16 17 22 17 22 11" /></symbol><symbol id="i-trending-up" viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
+  <polyline points="16 7 22 7 22 13" /></symbol><symbol id="i-triangle-alert" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3" />
+  <path d="M12 9v4" />
+  <path d="M12 17h.01" /></symbol><symbol id="i-upload" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+  <polyline points="17 8 12 3 7 8" />
+  <line x1="12" x2="12" y1="3" y2="15" /></symbol><symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+  <circle cx="9" cy="7" r="4" />
+  <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+  <path d="M16 3.13a4 4 0 0 1 0 7.75" /></symbol><symbol id="i-utensils" viewBox="0 0 24 24"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2" />
+  <path d="M7 2v20" />
+  <path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7" /></symbol><symbol id="i-wallet" viewBox="0 0 24 24"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1" />
+  <path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4" /></symbol><symbol id="i-wifi" viewBox="0 0 24 24"><path d="M12 20h.01" />
+  <path d="M2 8.82a15 15 0 0 1 20 0" />
+  <path d="M5 12.859a10 10 0 0 1 14 0" />
+  <path d="M8.5 16.429a5 5 0 0 1 7 0" /></symbol><symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18" />
+  <path d="m6 6 12 12" /></symbol><symbol id="i-zap" viewBox="0 0 24 24"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z" /></symbol></svg>
 <div class="app">
   <aside class="side">
     <div class="brand"><div class="logo">C</div><div><b>Mis Finanzas</b><span>Camino a $50K</span></div></div>
@@ -658,7 +863,8 @@ function demoData(){const accs=['BOFA','Deuda','Efectivo','TCC BOFA','Binance'];
 
 /* ================= HELPERS ================= */
 const $=id=>document.getElementById(id);
-const fmt=(v,d=0)=>(v<0?'-':'')+'$'+Math.abs(v).toLocaleString('en-US',{minimumFractionDigits:d,maximumFractionDigits:d});
+const nfES=window.nfES=(v,d=0)=>{const x=Math.abs(+v||0).toFixed(d).split('.');x[0]=x[0].replace(/\B(?=(\d{3})+(?!\d))/g,'.');return x.join(',')};
+const fmt=(v,d=0)=>(v<0?'-':'')+'$'+nfES(v,d);
 const MES=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
 const MES3=['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
 const cap=s=>s[0].toUpperCase()+s.slice(1);
@@ -874,7 +1080,7 @@ function rResumen(){const T=totals(S.cur);const byK={};incOf(S.cur).forEach(i=>b
   // meta
   const g=goalState(),P=goalPlan(g);
   mk('cRing',{type:'doughnut',data:{datasets:[{data:[g.saved,Math.max(0,50000-g.saved)],backgroundColor:['#3b82f6','#1A1A21'],borderWidth:0}]},options:{cutout:'80%',plugins:{legend:{display:false},tooltip:{enabled:false}},maintainAspectRatio:false}});
-  $('rGoalPct').textContent=(g.saved/500).toFixed(1)+'%';$('rGoalSub').textContent=`${fmt(g.saved)} de $50,000`;
+  $('rGoalPct').textContent=(g.saved/500).toFixed(1).replace('.',',')+'%';$('rGoalSub').textContent=`${fmt(g.saved)} de $50.000`;
   $('rGoalEta').innerHTML=P.hit?`Con tu plan actual llegas en <b class="blu">${dLabel(addMonths(P.hit))}</b>`:'Ajusta tu plan en la pestaña Meta';
   // tarjeta
   const c=D.card,po=payoff(c.bal,c.apr,c.pay),start=num(D.cfg.tarjeta_saldo_inicial)||c.bal;
@@ -898,13 +1104,13 @@ function rRate(){const R=rateInfo(S.cur),p=v=>R.inc?v/R.inc*100:0,rp=p(R.real),p
   $('rtGoal').innerHTML=[15,20,25,30].map(v=>`<button class="${v===R.pct?'on':''}" data-v="${v}">${v}%</button>`).join('');
   $('rtGoal').querySelectorAll('button').forEach(b=>b.onclick=()=>saveCfg(`Meta de ahorro: ${b.dataset.v}%`,c=>c.tasa_objetivo=+b.dataset.v));
   const cls=x=>x>=20?'pos':x>=15?'blu':x>=10?'warn':'neg';
-  $('rtPct').innerHTML=`<span class="${cls(rp)}">${rp.toFixed(1)}%</span><small>llevas este mes</small>`;
+  $('rtPct').innerHTML=`<span class="${cls(rp)}">${rp.toFixed(1).replace('.',',')}%</span><small>llevas este mes</small>`;
   const fr=R.goal-R.real;$('rtAmt').innerHTML=`${fmt(R.real)} de ${fmt(R.goal)} (tu meta del ${R.pct}%) · `+(fr>0.5?`<b class="warn">faltan ${fmt(fr)}</b>`:`<b class="pos">¡meta cumplida! +${fmt(-fr)}</b>`);
   const pos=x=>Math.max(0,Math.min(100,x/30*100))+'%';$('rtPin').style.left=pos(rp);$('rtGl').style.left=pos(R.pct);
   const gp=R.goal-R.plan;
   $('rtRows').innerHTML=[[`${ic(SAVC)} Fondo de Ahorro`,`${fmt(R.realSav)} <span style="color:var(--muted)">/ ${fmt(R.planSav)}</span>`],
     [`💳 Tarjeta sobre el mínimo`,`${fmt(R.realCard)} <span style="color:var(--muted)">/ ${fmt(R.planCard)}</span>`],
-    [`<b>Con tu presupuesto llegarías a</b>`,`<b class="${cls(pp)}">${fmt(R.plan)} · ${pp.toFixed(1)}%</b>`],
+    [`<b>Con tu presupuesto llegarías a</b>`,`<b class="${cls(pp)}">${fmt(R.plan)} · ${pp.toFixed(1).replace('.',',')}%</b>`],
     [gp>0.5?'Le falta a tu presupuesto':'Tu presupuesto',gp>0.5?`<b class="warn">${fmt(gp)}/mes</b>`:'<b class="pos">ya alcanza la meta ✓</b>']].map(r=>`<div class="rline"><span>${r[0]}</span><span class="num">${r[1]}</span></div>`).join('');
   if(gp<=0.5){$('rtSugT').textContent='Para cumplirla';
     $('rtSug').innerHTML=fr>0.5?`<div class="alert b"><span class="ai">📝</span><div>Tu presupuesto ya alcanza. Solo falta <b>registrar ${fmt(fr)}</b> más este mes (aporte al Fondo de Ahorro o pago a la tarjeta).</div></div>`:`<div class="alert g"><span class="ai">🙌</span><div>Vas cumpliendo tu ${R.pct}%. ¿Subes la meta? Usa los botones de arriba.</div></div>`;
@@ -951,10 +1157,10 @@ function openClose(k){const T=totals(k),RI=rateInfo(k),rp=RI.inc?RI.real/RI.inc*
     <div><span>💵 Ingreso${T.est?' (plan)':''}</span><b class="num">${fmt(T.eff)}</b></div>
     <div><span>🧾 Gastado (sin ahorro)</span><b class="num">${fmt(T.consumo)}</b></div>
     <div><span>💰 Ahorro + tarjeta extra</span><b class="num pos">${fmt(RI.real)}</b></div>
-    <div><span>📐 Tasa de ahorro (meta ${RI.pct}%)</span><b class="num ${rp>=RI.pct?'pos':rp>=10?'warn':'neg'}">${rp.toFixed(1)}%</b></div>
+    <div><span>📐 Tasa de ahorro (meta ${RI.pct}%)</span><b class="num ${rp>=RI.pct?'pos':rp>=10?'warn':'neg'}">${rp.toFixed(1).replace('.',',')}%</b></div>
     <div><span>⚖️ Balance del mes</span><b class="num ${T.left<0?'neg':'pos'}">${fmt(T.left)}</b></div>
     <div><span>🏛️ Patrimonio neto hoy</span><b class="num ${nw.net<0?'neg':'pos'}">${fmt(nw.net)}</b></div></div>`
-    +(prp!=null?`<div class="alert ${rp>=prp?'g':'a'}"><span class="ai">${rp>=prp?'📈':'📉'}</span><div>Tu tasa ${rp>=prp?'subió':'bajó'} de <b>${prp.toFixed(1)}%</b> en ${mLabel(prev).toLowerCase()} a <b>${rp.toFixed(1)}%</b>.</div></div>`:'')
+    +(prp!=null?`<div class="alert ${rp>=prp?'g':'a'}"><span class="ai">${rp>=prp?'📈':'📉'}</span><div>Tu tasa ${rp>=prp?'subió':'bajó'} de <b>${prp.toFixed(1).replace('.',',')}%</b> en ${mLabel(prev).toLowerCase()} a <b>${rp.toFixed(1).replace('.',',')}%</b>.</div></div>`:'')
     +(rp>=RI.pct?`<div class="alert g"><span class="ai">🙌</span><div>Cumpliste tu meta del ${RI.pct}%.</div></div>`:`<div class="alert a"><span class="ai">🎯</span><div>Te faltaron <b>${fmt(Math.max(0,RI.goal-RI.real))}</b> para tu meta del ${RI.pct}%.</div></div>`)
     +(over.length?`<div class="alert r"><span class="ai">🚨</span><div>Te pasaste en: ${over.map(([c,v])=>`<b>${esc(c)}</b> (+${fmt(v)})`).join(', ')}.</div></div>`:`<div class="alert g"><span class="ai">✅</span><div>Ninguna categoría se pasó del presupuesto.</div></div>`)
     +(top.length?`<div style="font-size:12px;color:var(--dim);font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin:12px 0 4px">En qué más gastaste</div>`+top.map(([c,v])=>`<div class="rline"><span>${ic(c)} ${esc(c)}</span><b class="num">${fmt(v)}</b></div>`).join(''):'');
@@ -970,7 +1176,7 @@ function rEF(){const E=efInfo();
   $('efPct').innerHTML=`<span class="${E.gap?'warn':'pos'}">${Math.round(E.pct)}%</span><small style="font-size:14px;color:var(--muted);font-weight:600;margin-left:6px">cubierto</small>`;
   $('efAmt').innerHTML=`${fmt(E.have)} de ${fmt(E.goal)} · `+(E.gap?`<b class="warn">faltan ${fmt(E.gap)}</b>`:'<b class="pos">¡cubierto!</b>');
   $('efBar').style.width=Math.max(2,E.pct)+'%';const cover=E.mo?E.have/E.mo:0;
-  $('efMarks').innerHTML=`<span>Hoy cubres <b style="color:var(--text)">${cover.toFixed(1)} meses</b></span><span>Meta: ${E.m} ${E.m>1?'meses':'mes'}</span>`;
+  $('efMarks').innerHTML=`<span>Hoy cubres <b style="color:var(--text)">${cover.toFixed(1).replace('.',',')} meses</b></span><span>Meta: ${E.m} ${E.m>1?'meses':'mes'}</span>`;
   const n=E.gap&&E.monthly?Math.ceil(E.gap/E.monthly):0;
   $('efInfo').innerHTML=(E.gap?`<div class="alert b"><span class="ai">⏱️</span><div>Con tu aporte de <b>${fmt(E.monthly)}/mes</b> al Fondo de Ahorro lo completas en <b>${n} mes${n>1?'es':''}</b> (${dLabel(addMonths(n))}).</div></div>`:`<div class="alert g"><span class="ai">✅</span><div>Tu colchón está completo. Todo lo que ahorres de aquí en adelante empuja directo la meta de $50K.</div></div>`)
     +`<div class="alert a"><span class="ai">🔒</span><div>No es una cuenta aparte: son los primeros <b>${fmt(E.goal)}</b> de tus mismos ahorros. Úsalos solo para emergencias reales (salud, carro, quedarte sin ingreso), no para gastos planeados.</div></div>`}
@@ -1086,7 +1292,7 @@ function rHist(){const ms=monthsList().filter(k=>txOf(k).length||incOf(k).length
   $('hInc').textContent=fmt(rows.reduce((a,r)=>a+r.inc,0)/n);$('hSpent').textContent=fmt(rows.reduce((a,r)=>a+r.cons+r.debt,0)/n);
   const avg=rows.reduce((a,r)=>a+r.rate,0)/n;$('hRate').textContent=Math.round(avg*100)+'%';$('hRateF').textContent=avg>=0.2?'Arriba del 20%: muy bien':'Meta sugerida: 20% o más';
   mk('cHist',{type:'bar',data:{labels:rows.map(r=>mShort(r.k)),datasets:[{label:'Ingreso',data:rows.map(r=>r.inc),backgroundColor:'#3b82f6',borderRadius:6},{label:'Gasto',data:rows.map(r=>r.cons),backgroundColor:'#60a5fa88',borderRadius:6},{label:'A tarjeta',data:rows.map(r=>r.debt),backgroundColor:'#fbbf24',borderRadius:6},{label:'Ahorro',data:rows.map(r=>r.sav),backgroundColor:'#34d399',borderRadius:6}]},
-    options:{maintainAspectRatio:false,plugins:{legend:{labels:{boxWidth:10,boxHeight:10}},tooltip:{callbacks:{label:c=>' '+c.dataset.label+': '+fmt(c.raw)}}},scales:{x:{grid:{display:false}},y:{ticks:{callback:v=>'$'+v.toLocaleString()}}}}});
+    options:{maintainAspectRatio:false,plugins:{legend:{labels:{boxWidth:10,boxHeight:10}},tooltip:{callbacks:{label:c=>' '+c.dataset.label+': '+fmt(c.raw)}}},scales:{x:{grid:{display:false}},y:{ticks:{callback:v=>'$'+nfES(v)}}}}});
   $('hBody').innerHTML=rows.slice().reverse().map(r=>`<tr data-k="${r.k}" style="cursor:pointer"><td><b>${mLabel(r.k)}</b></td><td class="r num">${fmt(r.inc)}${r.est?' <span class="pill a">plan</span>':''}</td><td class="r num">${fmt(r.cons)}</td><td class="r num">${fmt(r.debt)}</td><td class="r num pos">${fmt(r.sav)}</td><td class="r num ${r.bal<0?'neg':'pos'}">${fmt(r.bal)}</td><td class="r num"><span class="pill ${r.rate>=0.2?'g':r.rate>=0.1?'a':'r'}">${Math.round(r.rate*100)}%</span></td><td class="r"><button class="chip" data-cl="${r.k}">${isClosed(r.k)?'✓ Ver':'Ver'}</button></td></tr>`).join('')||'<tr><td colspan="8" style="text-align:center;color:var(--muted);padding:26px">Aún no hay meses con datos</td></tr>';
   $('hBody').querySelectorAll('tr[data-k]').forEach(tr=>tr.onclick=()=>{S.cur=tr.dataset.k;go('gastos')});
   $('hBody').querySelectorAll('[data-cl]').forEach(b=>b.onclick=e=>{e.stopPropagation();openClose(b.dataset.cl)});
@@ -1152,7 +1358,7 @@ function rCard(){const c=cardDraft||D.card;$('tBal').value=c.bal;$('tApr').value
   $('tQuick').querySelectorAll('.chip').forEach(b=>b.onclick=()=>{cardDraft=null;setCard({...D.card,pay:+b.dataset.p})});
   const L=Math.max(po.n===Infinity?60:po.n,base.n===Infinity?60:base.n,1);
   mk('cCard',{type:'line',data:{labels:[...Array(L+1)].map((_,i)=>i===0?'hoy':dLabel(addMonths(i))),datasets:[{label:`Pagando ${fmt(c.pay)}`,data:po.series.slice(0,L+1),borderColor:'#3b82f6',backgroundColor:'rgba(59,130,246,.2)',fill:true,tension:.2,pointRadius:0,borderWidth:2.5},{label:'Pagando $200',data:base.series.slice(0,L+1),borderColor:'#f87171',borderDash:[5,5],pointRadius:0,borderWidth:1.5}]},
-    options:{maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{labels:{boxWidth:10,boxHeight:10}},tooltip:{callbacks:{label:c=>' '+c.dataset.label+': '+fmt(c.raw)}}},scales:{x:{grid:{display:false},ticks:{maxTicksLimit:8}},y:{ticks:{callback:v=>'$'+v.toLocaleString()}}}}});
+    options:{maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{labels:{boxWidth:10,boxHeight:10}},tooltip:{callbacks:{label:c=>' '+c.dataset.label+': '+fmt(c.raw)}}},scales:{x:{grid:{display:false},ticks:{maxTicksLimit:8}},y:{ticks:{callback:v=>'$'+nfES(v)}}}}});
   $('tCmp').innerHTML=[200,250,300,400,500,600].map(v=>{const p=payoff(c.bal,c.apr,v);return `<tr style="${v===c.pay?'background:rgba(59,130,246,.1)':''}"><td class="num"><b>$${v}</b></td><td class="num">${p.n===Infinity?'—':p.n}</td><td>${p.n===Infinity?'—':dLabel(addMonths(p.n))}</td><td class="r num neg">${p.n===Infinity?'—':fmt(p.int)}</td><td class="r num pos">${v===200||p.n===Infinity||base.n===Infinity?'—':fmt(base.int-p.int)}</td></tr>`}).join('')}
 ['tBal','tApr','tPay'].forEach(id=>{const k={tBal:'bal',tApr:'apr',tPay:'pay'}[id];
   $(id).oninput=e=>{cardDraft={...(cardDraft||D.card),[k]:+e.target.value};rCard()};
@@ -1168,7 +1374,7 @@ function rGoal(){const g=goalState();rEF();
   $('gToggles').querySelectorAll('.toggle').forEach(e=>e.onclick=()=>{const k=e.dataset.k;saveCfg('Plan actualizado',c=>{if(k==='roll')c.meta_pasar_tarjeta=g.roll?'no':'si';else{c.recortes={...(c.recortes||{})};c.recortes[k]=!c.recortes[k]}})});
   const P=goalPlan(g),B=goalPlan(g,true);
   $('gEta').textContent=P.hit?dLabel(addMonths(P.hit)):'+30 años';$('gEtaF').textContent=P.hit?`${Math.floor(P.hit/12)} años y ${P.hit%12} meses`:'Sube tu aporte';
-  $('gNow').textContent=fmt(g.saved);$('gNowF').textContent=`${(g.saved/500).toFixed(1)}% de la meta · ${fmt(D.sav.earn)} de esto está en Binance Earn`;
+  $('gNow').textContent=fmt(g.saved);$('gNowF').textContent=`${(g.saved/500).toFixed(1).replace('.',',')}% de la meta · ${fmt(D.sav.earn)} de esto está en Binance Earn`;
   $('gMo').textContent=fmt(P.contribNow);$('gMoF').textContent=g.roll&&card.n!==Infinity?`Sube a ${fmt(P.contribNow+D.card.pay)} al saldar la tarjeta`:'Aporte fijo';
   const gain=(B.hit||361)-(P.hit||361);$('gGain').textContent=gain>0?`${Math.floor(gain/12)}a ${gain%12}m`:'—';
   const L=Math.max(P.series.length,Math.min(B.series.length,(P.hit||120)+12));const lab=[...Array(L)].map((_,i)=>i===0?'hoy':dLabel(addMonths(i)));
@@ -1192,7 +1398,7 @@ function rNet(){const nw=netWorth();$('pNet').textContent=fmt(nw.net,2);$('pNet'
   $('pRows').innerHTML=[['💰 Ahorros (pestaña Ahorros)',nw.aho,'pos'],['🪙 de eso, en Binance Earn',nw.earn,'blu'],['💳 Tarjeta BoFA',-nw.deuda,'neg'],['🏦 Debes a la cuenta familiar',-nw.fam,'neg']].map(r=>`<div class="nw-row"><span>${r[0]}</span><b class="num ${r[2]}">${fmt(r[1],2)}</b></div>`).join('')+`<div class="nw-row" style="font-size:15px"><b>Patrimonio neto</b><b class="num ${nw.net<0?'neg':'pos'}">${fmt(nw.net,2)}</b></div>`;
   const pts=[...D.patr.map(p=>({l:p.mes,v:p.neto})),{l:'Hoy',v:nw.net}];$('pHistSub').textContent=D.patr.length?`${D.patr.length} foto${D.patr.length>1?'s':''} guardada${D.patr.length>1?'s':''} + hoy`:'Guarda una foto cada mes para ver tu avance';
   mk('cNet',{type:'line',data:{labels:pts.map(p=>p.l),datasets:[{label:'Patrimonio neto',data:pts.map(p=>p.v),borderColor:'#3b82f6',backgroundColor:'rgba(59,130,246,.2)',fill:true,tension:.25,pointRadius:4,pointBackgroundColor:'#60a5fa',borderWidth:2.5}]},
-    options:{maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+fmt(c.raw)}}},scales:{x:{grid:{display:false}},y:{ticks:{callback:v=>'$'+v.toLocaleString()}}}}});
+    options:{maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+fmt(c.raw)}}},scales:{x:{grid:{display:false}},y:{ticks:{callback:v=>'$'+nfES(v)}}}}});
   // cuadre
   const cu=D.cfg.cuadre||{};const accs=[['BOFA','🏦 BofA (saldo total del banco)'],['Binance','🪙 Binance'],['Efectivo','💵 Efectivo']];
   $('rcSub').innerHTML=cu.fecha?`Último cuadre: <b>${esc(cu.fecha)}</b>. Escribe lo que ves hoy en cada cuenta.`:'Escribe lo que ves hoy en cada cuenta y compáralo con lo que dice la app';
@@ -1276,7 +1482,7 @@ if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(
 
 </script>
 <!-- ===== Capa v4: identidad propia (negro puro + azul eléctrico), dock flotante y transiciones ===== -->
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
 <style id="v4">
 /* Negro puro de pantalla OLED, tarjetas apenas visibles y un solo color protagonista: el azul eléctrico.
    Sora (geométrica, de fintech) para títulos y cifras; Manrope para leer. */
@@ -1392,10 +1598,10 @@ input:focus,select:focus{border-color:var(--blue)!important;box-shadow:0 0 0 3px
  if(window.Chart){Chart.defaults.color='#8E95A8';Chart.defaults.font.family="'Manrope',sans-serif";Chart.defaults.borderColor='rgba(255,255,255,.06)';Chart.defaults.animation={duration:900,easing:'easeOutQuart'}}
  const ease=t=>1-Math.pow(1-t,3);
  function countUp(root){if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-  root.querySelectorAll('.num').forEach(el=>{if(el.childElementCount)return;const t=el.textContent.trim();const m=t.match(/^(-?)([^\d-]*?)([\d,]+(?:\.\d+)?)(.*)$/);if(!m||t.length>22)return;
-   const dec=(m[3].split('.')[1]||'').length,to=parseFloat(m[3].replace(/,/g,''))*(m[1]?-1:1),from=el._v==null?0:el._v;el._v=to;if(from===to)return;
+  root.querySelectorAll('.num').forEach(el=>{if(el.childElementCount)return;const t=el.textContent.trim();const m=t.match(/^(-?)([^\d-]*?)(\d{1,3}(?:\.\d{3})*(?:,\d+)?)(.*)$/);if(!m||t.length>22)return;
+   const dec=(m[3].split(',')[1]||'').length,to=parseFloat(m[3].replace(/\./g,'').replace(',','.'))*(m[1]?-1:1),from=el._v==null?0:el._v;el._v=to;if(from===to)return;
    const pre=m[2],suf=m[4],t0=performance.now(),dur=750;cancelAnimationFrame(el._raf);
-   const step=now=>{const k=Math.min(1,(now-t0)/dur),v=from+(to-from)*ease(k);el.textContent=(v<0?'-':'')+pre+Math.abs(v).toLocaleString('en-US',{minimumFractionDigits:dec,maximumFractionDigits:dec})+suf;if(k<1)el._raf=requestAnimationFrame(step);else el.textContent=t};
+   const step=now=>{const k=Math.min(1,(now-t0)/dur),v=from+(to-from)*ease(k);el.textContent=(v<0?'-':'')+pre+nfES(v,dec)+suf;if(k<1)el._raf=requestAnimationFrame(step);else el.textContent=t};
    el._raf=requestAnimationFrame(step)})}
  function dockSync(v){const inMore=MORE.includes(v);qa('.dock [data-d]').forEach(b=>b.classList.toggle('on',b.dataset.d===v||(inMore&&b.dataset.d==='mas')));
   const on=q('.dock button.on'),ind=q('#dInd');if(on&&ind){ind.style.left=on.offsetLeft+'px';ind.style.width=on.offsetWidth+'px'}
@@ -1502,8 +1708,8 @@ body.priv .view .num,body.priv .view .val,body.priv .view .big,body.priv .story 
 (function(){
  const q=s=>document.querySelector(s),qa=s=>[...document.querySelectorAll(s)];
  const X=()=>{D.x4=D.x4||{};D.x4.al=D.x4.al||{};D.x4.viaje=D.x4.viaje||{meta:2000,saldo:0};D.x4.car=D.x4.car||{precio:40000,inicial:null,tasa:16,plazo:60,tope:800};return D.x4};
- const fmt2=v=>'$'+(+v||0).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
- const bs=v=>(+v||0).toLocaleString('es-VE',{minimumFractionDigits:2,maximumFractionDigits:2});
+ const fmt2=v=>'$'+nfES(v,2);
+ const bs=v=>nfES(v,2);
  const pnum=s=>{s=String(s||'').replace(/[^\d.,-]/g,'');if(!s)return 0;if(s.includes(',')&&s.includes('.'))s=s.lastIndexOf(',')>s.lastIndexOf('.')?s.replace(/\./g,'').replace(',','.'):s.replace(/,/g,'');else if(s.includes(','))s=s.replace(',','.');return parseFloat(s)||0};
  const MESX=['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
  const fdate=iso=>{if(!iso)return '';const[y,m,d]=iso.split('-');return `${+d} ${MESX[+m-1]} ${y}`};
@@ -1614,7 +1820,7 @@ body.priv .view .num,body.priv .view .val,body.priv .view .big,body.priv .story 
   const g=goalState(),have=g.saved||0,mo=goalPlan(g).contribNow||g.monthly||0,need=Math.max(ini,minIni),gap=Math.max(0,need-have),m=mo>0?Math.ceil(gap/mo):null;
   q('#crWhenS').textContent=`Tienes ahorrado ${fmt(have)} y aportas unos ${fmt(mo)} al mes`;
   q('#crBar').style.width=Math.min(100,need?have/need*100:100)+'%';
-  q('#crWhen').innerHTML=gap<=0?`<b class="pos">¡Ya tienes la inicial de ${fmt(need)}!</b>`:`Te faltan <b>${fmt(gap)}</b> para una inicial de ${fmt(need)}. ${m?`A tu ritmo, en unos <b>${m} meses</b> (${m>=12?(m/12).toFixed(1)+' años':'menos de un año'}).`:'Define tu aporte mensual en la Meta para estimar cuándo.'}`;
+  q('#crWhen').innerHTML=gap<=0?`<b class="pos">¡Ya tienes la inicial de ${fmt(need)}!</b>`:`Te faltan <b>${fmt(gap)}</b> para una inicial de ${fmt(need)}. ${m?`A tu ritmo, en unos <b>${m} meses</b> (${m>=12?(m/12).toFixed(1).replace('.',',')+' años':'menos de un año'}).`:'Define tu aporte mensual en la Meta para estimar cuándo.'}`;
 }
  [['#crPrecio','precio'],['#crIni','inicial'],['#crTasa','tasa'],['#crTope','tope']].forEach(([s,k])=>q(s).oninput=e=>{X().car[k]=+e.target.value;if(k==='precio'&&X().car.inicial>X().car.precio)X().car.inicial=X().car.precio;rCar();clearTimeout(rCar.t);rCar.t=setTimeout(saveLocal,400)});
 
@@ -1628,7 +1834,7 @@ body.priv .view .num,body.priv .view .val,body.priv .view .big,body.priv .story 
   const sims=S3.map(m=>{let b=sv,s=[b],hit=null;for(let t=1;t<=120;t++){b=b*(1+r)+m;s.push(b);if(b>=50000&&!hit)hit=t}return{m,s,hit}});
   const L=Math.min(120,Math.max(...sims.map(x=>x.hit||120))+3);
   q('#scS').textContent=`Desde tus ${fmt(sv)} de hoy, ahorrando cada mes:`;
-  q('#scN').innerHTML=sims.map((x,i)=>`<div><span>${fmt(x.m)}/mes</span><b style="color:${cols[i]}">${x.hit?(x.hit>=12?(x.hit/12).toFixed(1)+' años':x.hit+' meses'):'+10 años'}</b></div>`).join('');
+  q('#scN').innerHTML=sims.map((x,i)=>`<div><span>${fmt(x.m)}/mes</span><b style="color:${cols[i]}">${x.hit?(x.hit>=12?(x.hit/12).toFixed(1).replace('.',',')+' años':x.hit+' meses'):'+10 años'}</b></div>`).join('');
   mk('cScn',{type:'line',data:{labels:Array.from({length:L+1},(_,i)=>i%12===0?(i/12)+'a':''),datasets:sims.map((x,i)=>({label:fmt(x.m)+'/mes',data:x.s.slice(0,L+1),borderColor:cols[i],borderWidth:2.5,pointRadius:0,tension:.3})).concat([{label:'$50K',data:Array(L+1).fill(50000),borderColor:'rgba(255,255,255,.25)',borderDash:[6,6],borderWidth:1.5,pointRadius:0}])},
    options:{maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+c.dataset.label+': '+fmt(c.raw)}}},scales:{x:{grid:{display:false},ticks:{autoSkip:false,maxRotation:0}},y:{grid:{color:'rgba(255,255,255,.05)'},ticks:{callback:v=>'$'+v/1000+'K'}}}}})}
 
@@ -1664,7 +1870,7 @@ body.priv .view .num,body.priv .view .val,body.priv .view .big,body.priv .story 
  function showSlide(i){SI=i;const s=SL[i];clearTimeout(ST);
   q('#stSegs').innerHTML=SL.map((_,j)=>`<i class="${j<i?'done':j===i?'cur':''}"><b></b></i>`).join('');
   q('#stSlide').outerHTML=`<div class="slide" id="stSlide"><div class="em">${s.em}</div><div class="k">${esc(s.k)}</div>${s.t?`<div class="t">${esc(s.t)}</div>`:''}${s.v?`<div class="bigv num">${s.v}</div>`:''}${s.s?`<div class="s">${esc(s.s)}</div>`:''}</div>`;
-  const bv=q('#stSlide .bigv');if(bv){bv._v=0;const t=bv.textContent,m=t.match(/^(\D*)([\d,]+)(.*)$/);if(m){const to=+m[2].replace(/,/g,''),t0=performance.now();const f=n=>{const p=Math.min(1,(n-t0)/900),v=Math.round(to*(1-Math.pow(1-p,3)));bv.textContent=m[1]+v.toLocaleString('en-US')+m[3];if(p<1)requestAnimationFrame(f)};requestAnimationFrame(f)}}
+  const bv=q('#stSlide .bigv');if(bv){bv._v=0;const t=bv.textContent,m=t.match(/^(\D*)([\d.]+)(.*)$/);if(m){const to=+m[2].replace(/\./g,''),t0=performance.now();const f=n=>{const p=Math.min(1,(n-t0)/900),v=Math.round(to*(1-Math.pow(1-p,3)));bv.textContent=m[1]+nfES(v)+m[3];if(p<1)requestAnimationFrame(f)};requestAnimationFrame(f)}}
   ST=setTimeout(()=>{if(SI<SL.length-1)showSlide(SI+1)},5000)}
  function openStory(){SL=slides(S.cur);q('#story').classList.add('on');showSlide(0)}
  const closeStory=()=>{clearTimeout(ST);q('#story').classList.remove('on')};
@@ -1681,5 +1887,127 @@ body.priv .view .num,body.priv .view .val,body.priv .view .big,body.priv .story 
 })();
 </script>
 
+<!-- ===== Capa v6 «Diseño 2» (nov 2026): base común, iconos de línea, tema carbón y claro, una sola tipografía,
+     transiciones entre secciones, aviso de respaldo solo en Inicio y primeros pasos cuando no hay datos ===== -->
+<style id="v6">
+:root{--bg:#0E0F12;--surface:#16181D;--surface2:#1C1F26;--surface3:#232731;--border:rgba(255,255,255,.07);--text:#F2F4F8;--muted:#9AA1B2;--dim:#6B7283;
+ --blue:#3D7BFF;--blue2:#6E9BFF;--blue3:#A9C2FF;--green:#2FD69C;--red:#FF6B6B;--amber:#FFB547;--violet:#A78BFA;--cyan:#38BDF8;
+ --fd:'Manrope',system-ui,sans-serif;--r:16px;--e:cubic-bezier(.2,.8,.2,1);--sh:0 1px 0 rgba(255,255,255,.04) inset}
+html[data-tema=claro]{--bg:#F5F6F8;--surface:#FFFFFF;--surface2:#F1F3F6;--surface3:#E9ECF1;--border:rgba(15,17,21,.08);--text:#0F1115;--muted:#5F6675;--dim:#8A90A0;--blue:#2F6BF0;--green:#12A877;--red:#E04848;--amber:#C27A10;--sh:0 4px 16px rgba(15,17,21,.05)}
+html,body{font-family:'Manrope',system-ui,sans-serif!important;background:var(--bg)!important;color:var(--text)}
+body{background:var(--bg)!important;font-size:15px}
+.num,.val,.big,.bigv{font-variant-numeric:tabular-nums;font-feature-settings:"tnum"}
+h1,h2,h3,b,.kpi .val{letter-spacing:-.01em}
+/* Tarjetas planas, un radio, una sombra */
+.card{background:var(--surface)!important;border:1px solid var(--border)!important;border-radius:16px!important;box-shadow:var(--sh)}
+.kpi.hero{background:linear-gradient(160deg,var(--blue),#2457D6)!important;border:0!important;color:#fff}
+.kpi.hero .lbl,.kpi.hero .foot{color:rgba(255,255,255,.82)!important}
+.btn{border-radius:12px!important;font-weight:700;transition:transform 120ms var(--e),background-color 240ms,opacity 240ms}
+.btn:active,.chip:active,.x5chip:active,.dock button:active,.card.click:active,.tiles button:active{transform:scale(.97)}
+.chip,.x5chip,.eye,.bcvmini .fl,.pk .e,.scn div,.conv .inp,.dots7 i{background:var(--surface2)!important;border-color:var(--border)!important;color:var(--text)}
+.sub,.card .sub,.kpi .lbl,.kpi .foot,small{color:var(--muted)}
+/* Iconos de línea (Lucide) en lugar de emojis */
+svg.ic{width:1.15em;height:1.15em;vertical-align:-.2em;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.pk .e svg.ic,.bcvmini .fl svg.ic,.tiles .e svg.ic{width:22px;height:22px;color:var(--blue2)}
+.story .em svg.ic{width:64px;height:64px;color:#fff;stroke-width:1.5}
+.catgrid button span svg.ic{width:20px;height:20px}
+/* Encabezado compacto: el aviso de respaldo y la conexión solo en Inicio */
+body:not([data-vista=resumen]) #banner,body:not([data-vista=resumen]) #sync{display:none!important}
+@media (max-width:760px){.top{margin-bottom:14px}.top h1{font-size:26px}.top .acts{gap:8px!important}}
+.banner{border-radius:14px!important}
+/* Letra mínima legible */
+.kpi .foot,.card .sub,.pk small,.scn span,.dock span,.tiles small{font-size:13px!important}
+.dock span{font-size:11.5px!important}
+.tiles button{min-height:118px}
+/* Primeros pasos cuando aún no hay datos */
+.v6empty{display:flex;gap:14px;align-items:center;margin-bottom:16px;padding:18px!important}
+.v6empty .ico{width:48px;height:48px;border-radius:14px;background:rgba(61,123,255,.14);color:var(--blue2);display:grid;place-items:center;flex:none}
+.v6empty .ico svg{width:24px;height:24px}
+.v6empty b{display:block;font-size:16px}.v6empty p{color:var(--muted);font-size:13.5px;margin:2px 0 10px}
+/* Transiciones entre secciones (iOS 18+) */
+.dock{view-transition-name:dock}.top{view-transition-name:cabecera}
+::view-transition-old(root),::view-transition-new(root){animation-duration:380ms;animation-timing-function:var(--e)}
+html[data-vt=r]::view-transition-old(root){animation-name:v6SaleIzq}html[data-vt=r]::view-transition-new(root){animation-name:v6EntraDer}
+html[data-vt=l]::view-transition-old(root){animation-name:v6SaleDer}html[data-vt=l]::view-transition-new(root){animation-name:v6EntraIzq}
+::view-transition-old(cabecera){animation:v6Fade 260ms var(--e) both}::view-transition-new(cabecera){animation:v6Fade 260ms var(--e) reverse both}
+@keyframes v6SaleIzq{to{opacity:0;transform:translateX(-16%) scale(.97)}}@keyframes v6EntraDer{from{opacity:0;transform:translateX(20%) scale(.98)}}
+@keyframes v6SaleDer{to{opacity:0;transform:translateX(16%) scale(.97)}}@keyframes v6EntraIzq{from{opacity:0;transform:translateX(-20%) scale(.98)}}
+@keyframes v6Fade{to{opacity:0}}
+html[data-vt] .view.fx-r,html[data-vt] .view.fx-l,html[data-vt] .view.fx-u{animation:none!important}
+.view.on>*{animation:v6Sube 400ms var(--e) both}
+.view.on>*:nth-child(2){animation-delay:40ms}.view.on>*:nth-child(3){animation-delay:80ms}.view.on>*:nth-child(4){animation-delay:120ms}.view.on>*:nth-child(n+5){animation-delay:160ms}
+@keyframes v6Sube{from{opacity:0;transform:translateY(8px)}}
+/* Tema claro: superficies que estaban fijas en oscuro */
+html[data-tema=claro] .dock,html[data-tema=claro] .msheet .in{background:rgba(255,255,255,.86)!important;border-color:var(--border)!important;color:var(--text)}
+html[data-tema=claro] .dock button{color:var(--muted)}html[data-tema=claro] .dock button.on{color:var(--blue)}
+html[data-tema=claro] .modal .sheet,html[data-tema=claro] .sheet{background:#fff!important;color:var(--text);border-color:var(--border)!important}
+html[data-tema=claro] .field,html[data-tema=claro] input,html[data-tema=claro] select{background:var(--surface2)!important;color:var(--text)!important;border-color:var(--border)!important}
+html[data-tema=claro] .conv .inp input{color:var(--text)}
+html[data-tema=claro] .storybtn{background:linear-gradient(140deg,#E8EFFF,#fff 70%)!important}
+html[data-tema=claro] .side{background:rgba(255,255,255,.8)}
+html[data-tema=claro] .bar,html[data-tema=claro] .bar.big-bar{background:var(--surface3)!important}
+html[data-tema=claro] .tiles button{background:var(--surface)!important;color:var(--text)!important;border:1px solid var(--border)!important}
+html[data-tema=claro] .tiles button b{color:var(--text)!important}
+.month,.sync,.eye{border:1px solid var(--border)!important;background:var(--surface)!important}
+.v6tema{display:flex;gap:6px;margin:14px 0 2px}.v6tema button{flex:1;min-height:44px;border-radius:12px;border:1px solid var(--border);background:var(--surface2);color:var(--text);font-weight:700;font-family:inherit}
+.v6tema button.on{background:var(--blue);border-color:var(--blue);color:#fff}
+.top .acts{flex-wrap:nowrap!important;align-items:center}
+.top .acts .sync #syncTxt{display:none}
+.top .acts .month{flex:1;justify-content:space-between}
+.storybtn b,.storybtn .t,.storybtn h3{color:var(--text)!important;-webkit-text-fill-color:currentColor;background:none!important}
+[data-go2="carro"]{white-space:nowrap}
+#v-resumen.on{display:flex;flex-direction:column}
+.dock .plus,.dock .plus svg{color:#fff!important}
+#v-resumen>.card:has(#dBig){order:-2}
+#v-resumen>.grid.g4{order:-1}
+#v6empty{order:-3}
+@media (prefers-reduced-motion:reduce){.view.on>*{animation:none!important}::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none!important}}
+</style>
+<script>
+(function(){
+ const q=s=>document.querySelector(s);
+ /* Tema: carbón (por defecto) o claro */
+ const tema=()=>localStorage.getItem('mf:tema')||'oscuro';
+ const aplicaTema=()=>{document.documentElement.dataset.tema=tema();const m=q('meta[name="theme-color"]');if(m)m.content=tema()==='claro'?'#F5F6F8':'#0E0F12';
+   const sb=q('meta[name="apple-mobile-web-app-status-bar-style"]');if(sb)sb.content=tema()==='claro'?'default':'black-translucent'};
+ aplicaTema();
+ /* Iconos en lugar de emojis */
+ const I={'💵':'banknote','💸':'wallet','🧾':'receipt','📊':'chart-column','👥':'users','💳':'credit-card','🎯':'target','🏛️':'landmark','🏛':'landmark','💾':'save','🔒':'lock','⬇️':'download','⬆️':'upload','📐':'ruler','🐜':'coins','🔥':'flame','🇻🇪':'badge-dollar-sign','🚗':'car','✈️':'plane','🛟':'life-buoy','👛':'wallet','📈':'trending-up','📉':'trending-down','💰':'piggy-bank','🏦':'landmark','🎁':'gift','🤝':'handshake','➕':'plus','＋':'plus','✏️':'pencil','✎':'pencil','🗑':'trash-2','🗑️':'trash-2','⚠️':'triangle-alert','🚨':'circle-alert','✅':'circle-check','🔔':'bell','👁':'eye','🙈':'eye-off','🛒':'shopping-cart','⛽':'fuel','🏠':'house','💡':'zap','⚡':'zap','🎉':'party-popper','📅':'calendar','🗓️':'calendar','📥':'download','🎛️':'sliders-horizontal','🚩':'flag','🧮':'calculator','🏢':'building-2','📶':'wifi','🏅':'award','🏋️':'dumbbell','💪':'dumbbell','🧹':'sparkles','📝':'file-text','⚖️':'scale','🚫':'x','🌱':'sparkles','🚀':'trending-up','⛰️':'target','📌':'pin','💙':'heart-pulse','🐷':'piggy-bank','💼':'briefcase','🪙':'coins','🔗':'share-2','📸':'image','📦':'store','🗂️':'list','🏁':'flag','🔴':'circle-alert','🟢':'circle-check','🟡':'circle-alert','🙌':'party-popper','📱':'smartphone'};
+ const quitar=['👋','🙋','👨‍','👩‍','👧','🧠'];
+ const keys=Object.keys(I).concat(quitar).sort((a,b)=>b.length-a.length).map(k=>k.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'));
+ const RX=new RegExp('('+keys.join('|')+')\\uFE0F?','g'),RX1=new RegExp(keys.join('|'));
+ const svg=n=>{const s=document.createElementNS('http://www.w3.org/2000/svg','svg');s.setAttribute('class','ic');s.setAttribute('aria-hidden','true');const u=document.createElementNS('http://www.w3.org/2000/svg','use');u.setAttribute('href','#i-'+n);s.appendChild(u);return s};
+ const SKIP=/^(SCRIPT|STYLE|TEXTAREA|INPUT|OPTION|SELECT|TITLE)$/;
+ function iconiza(root){const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:n=>(n.parentNode&&!SKIP.test(n.parentNode.nodeName)&&RX1.test(n.nodeValue))?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT});
+  const L=[];while(w.nextNode())L.push(w.currentNode);
+  L.forEach(t=>{RX.lastIndex=0;const parts=t.nodeValue.split(RX),f=document.createDocumentFragment();
+   parts.forEach((p,i)=>{if(i%2){const k=p.replace(/️$/,'');if(I[k]||I[p])f.appendChild(svg(I[k]||I[p]))}else if(p)f.appendChild(document.createTextNode(i===parts.length-1||!parts[i+1]?p:p))});
+   t.parentNode.replaceChild(f,t)})}
+ let pend=false;const obs=new MutationObserver(()=>{if(pend)return;pend=true;requestAnimationFrame(()=>{pend=false;obs.disconnect();iconiza(document.body);obs.observe(document.body,{subtree:true,childList:true,characterData:true})})});
+ iconiza(document.body);obs.observe(document.body,{subtree:true,childList:true,characterData:true});
+ /* Vista actual en <body> y transiciones entre secciones */
+ const ORDER=['resumen','gastos','historial','compartidos','tarjeta','meta','carro','patrimonio','bcv'];
+ const g0=window.go;let cur=null;
+ window.go=function(v){const prev=(typeof S!=='undefined'&&S.view)||cur;
+  const R=document.documentElement,rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const run=()=>{g0.apply(this,arguments);cur=(typeof S!=='undefined'&&S.view)||v;document.body.dataset.vista=cur;primerosPasos()};
+  if(prev&&prev!==v&&document.startViewTransition&&!rm){R.dataset.vt=ORDER.indexOf(v)>ORDER.indexOf(prev)?'r':'l';const t=document.startViewTransition(run);t.finished.finally(()=>{delete R.dataset.vt})}else run()};
+ /* Primeros pasos: si no hay nada registrado, una sola tarjeta que dice por dónde empezar */
+ function primerosPasos(){const v=q('#v-resumen');if(!v)return;let c=q('#v6empty');
+  const vacio=typeof D!=='undefined'&&D&&!(D.tx||[]).length&&!(D.inc||[]).length;
+  if(!vacio){if(c)c.remove();return}
+  if(!c){v.insertAdjacentHTML('afterbegin','<div class="card v6empty" id="v6empty"><span class="ico"><svg class="ic"><use href="#i-banknote"/></svg></span><div style="flex:1"><b>Empieza por tu ingreso del mes</b><p>Con eso la app calcula cuánto puedes gastar cada día y cuánto ahorras.</p><button class="btn" id="v6inc"><svg class="ic"><use href="#i-plus"/></svg> Registrar ingreso</button></div></div>');
+   q('#v6inc').onclick=()=>{const k=q('#kIncomeCard');if(k)k.click()}}}
+ /* Selector de tema en «Más» */
+ const mm=q('#mMore .in');if(mm&&!q('.v6tema')){mm.insertAdjacentHTML('beforeend','<div class="v6tema" role="group" aria-label="Tema"><button data-t="oscuro">Oscuro</button><button data-t="claro">Claro</button></div>');
+  const sync=()=>mm.querySelectorAll('.v6tema button').forEach(b=>b.classList.toggle('on',b.dataset.t===tema()));sync();
+  mm.querySelectorAll('.v6tema button').forEach(b=>b.onclick=e=>{e.stopPropagation();localStorage.setItem('mf:tema',b.dataset.t);aplicaTema();sync();if(window.Chart&&typeof render==='function')try{render()}catch(x){}})}
+ /* Gasto rápido: las categorías que más usas, primero */
+ const dm=window.drawModal;if(typeof dm==='function'){window.drawModal=function(){dm.apply(this,arguments);try{if(typeof mMode!=='undefined'&&mMode==='gasto'&&D&&D.tx){const c={},lim=Date.now()-90*864e5;D.tx.forEach(t=>{if(new Date(t.d)>=lim)c[t.c]=(c[t.c]||0)+1});
+   const g=q('#mCats');[...g.children].sort((a,b)=>(c[b.dataset.c]||0)-(c[a.dataset.c]||0)).forEach(b=>g.appendChild(b))}}catch(e){}}}
+ const arranque=()=>{document.body.dataset.vista=(typeof S!=='undefined'&&S.view)||'resumen';primerosPasos()};
+ if(document.readyState==='complete')setTimeout(arranque,80);else addEventListener('load',()=>setTimeout(arranque,80));
+})();
+</script>
 </body>
 </html>
