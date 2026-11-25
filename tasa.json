@@ -1,10 +1,10 @@
 {
- "usd": 919.8227,
- "eur": 1011.17949056,
- "fecha_valor": "2026-11-24",
- "fecha_texto": "Martes, 24 Noviembre  2026",
+ "usd": 922.5637,
+ "eur": 1012.21844036,
+ "fecha_valor": "2026-11-25",
+ "fecha_texto": "Miércoles, 25 Noviembre  2026",
  "fuente": "Banco Central de Venezuela · bcv.org.ve",
- "actualizado": "2026-11-21T00:53:07Z",
+ "actualizado": "2026-11-25T04:56:44Z",
  "historial": [
   {
    "fecha": "2026-11-17",
@@ -25,6 +25,10 @@
   {
    "fecha": "2026-11-24",
    "usd": 919.8227
+  },
+  {
+   "fecha": "2026-11-25",
+   "usd": 922.5637
   }
  ]
 }
